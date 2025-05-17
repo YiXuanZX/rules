@@ -8,4 +8,4 @@ rule-providers:
     interval: 86400
 
 rules:
-  - RULE-SET,Prevent_DNS_Leaks,你的策略组名称
+  - RULE-SET,Prevent_DNS_Leaks,替换为你的策略组名称
