@@ -3,7 +3,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rule_providers/Prevent_DNS_Leaks.yaml
+    path: ./rule_providers/Prevent_DNS_Leaks.txt
     url: "https://raw.githubusercontent.com/YiXuanZX/rules/main/Prevent_DNS_Leaks.list"
     interval: 86400
 
