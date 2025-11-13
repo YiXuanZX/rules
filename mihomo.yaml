@@ -1,5 +1,6 @@
+pr: &pr {type: select, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false}
 select: &select {type: select, use: [provider1]}
-p: &p {type: http, interval: 86400, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600}}
+p: &p {type: http, interval: 86400, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false}}
 
 proxy-providers:
   provider1:
@@ -87,9 +88,9 @@ proxy-groups:
   - {name: 欧洲, <<: *select, filter: "(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"}
   - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:流量|到期|过期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states)).*"}
 
-  - {name: 代理, type: select, proxies: [香港, 新加坡, 日本, 美国, 其他]}
-  - {name: TG, type: select, proxies: [PASS, 香港, 新加坡, 日本, 美国, 其他]}
-  - {name: AI, type: select, proxies: [美国, 香港, 新加坡, 日本, 其他]}
+  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他]}
+  - {name: TG, <<: *pr, proxies: [PASS, 香港, 新加坡, 日本, 美国, 其他]}
+  - {name: AI, <<: *pr, proxies: [美国, 香港, 新加坡, 日本, 其他]}
 
 rules:
   - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT
