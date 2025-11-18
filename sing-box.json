@@ -43,7 +43,7 @@
     "rule_set": [
       {"tag":"AWAvenue-Ads","type":"remote","url":"https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox.json","download_detour":"proxy"},
       {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs","download_detour":"proxy"},
-      {"tag":"ai","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/ai","download_detour":"proxy"},
+      {"tag":"ai","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/ai.srs","download_detour":"proxy"},
       {"tag":"telegram","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs","download_detour":"proxy"},
       {"tag":"github","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs","download_detour":"proxy"},
       {"tag":"twitter","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs","download_detour":"proxy"},
