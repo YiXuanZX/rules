@@ -1,0 +1,11 @@
+rule-providers:  
+  Prevent_DNS_Leaks:
+    type: http
+    behavior: domain
+    format: text
+    path: ./rule_providers/Prevent_DNS_Leaks.txt
+    url: "https://raw.githubusercontent.com/YiXuanZX/rules/main/Prevent_DNS_Leaks.list"
+    interval: 86400
+
+rules:
+  - RULE-SET,Prevent_DNS_Leaks,替换为你的策略组名称
