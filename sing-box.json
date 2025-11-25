@@ -1,7 +1,7 @@
 {
   "dns": {
     "servers": [
-      {"tag":"ali","type":"udp","server":"223.5.5.5"},
+      {"tag":"ali","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
       {"tag":"google","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
       {"tag":"local","type":"local"},
       {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/16","inet6_range":"2001:db8::/32"},

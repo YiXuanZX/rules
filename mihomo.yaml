@@ -69,14 +69,17 @@ dns:
     - "+.market.xiaomi.com"
     #- "rule-set:AWAvenue-Ads"
   proxy-server-nameserver:
-    - 223.5.5.5
+    - https://dns.alidns.com/dns-query
   nameserver:
-    - 223.5.5.5
+    - https://dns.alidns.com/dns-query
   nameserver-policy:
     "*": system
     "rule-set:private": system
     #"rule-set:AWAvenue-Ads": rcode://name_error
     "rule-set:cn": system
+
+hosts:
+  dns.alidns.com: [223.5.5.5, 223.6.6.6, 2400:3200::1, 2400:3200:baba::1]
 
 proxy-groups:
   - {name: 香港, <<: *select, filter: "(?i)香港|hong kong"}
