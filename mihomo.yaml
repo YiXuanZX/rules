@@ -69,7 +69,7 @@ dns:
     - "+.market.xiaomi.com"
     #- "rule-set:AWAvenue-Ads"
   proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
   nameserver:
     - https://dns.alidns.com/dns-query
   nameserver-policy:
