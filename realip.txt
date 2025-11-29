@@ -1,0 +1,6 @@
+*
++.lan
++.local
++.arpa
++.market.xiaomi.com
+lancache.steamcontent.com
