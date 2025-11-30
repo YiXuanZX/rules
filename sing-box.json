@@ -3,9 +3,9 @@
     "servers": [
       {"tag":"proxy_server_dns","type":"https","server":"doh.pub","domain_resolver":"hosts"},
       {"tag":"direct_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
-      {"tag":"proxy_dns","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
+      {"tag":"proxy_dns","type":"https","server":"cloudflare-dns.com","domain_resolver":"hosts","detour":"proxy"},
       {"tag":"local","type":"local"},
-      {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/16","inet6_range":"2001:db8::/32"},
+      {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"28.0.0.0/8","inet6_range":"2400::/64"},
       {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"doh.pub":["1.12.12.21","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4"],"cloudflare-dns.com":["104.16.248.249","104.16.249.249"]}}
     ],
     "rules": [
@@ -21,7 +21,7 @@
   },
   "route": {
     "rules": [
-      {"action":"sniff"},
+      {"rule_set":"telegram_ip","invert":true,"action":"sniff"},
       {"protocol":"dns","action":"hijack-dns"},
       {"clash_mode":"Global","outbound":"GLOBAL"},
       {"clash_mode":"Direct","outbound":"direct"},
@@ -46,6 +46,7 @@
       {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs","download_detour":"proxy"},
       {"tag":"ai","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/ai.srs","download_detour":"proxy"},
       {"tag":"telegram","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs","download_detour":"proxy"},
+      {"tag":"telegram_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/telegramip.srs","download_detour":"proxy"},
       {"tag":"github","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs","download_detour":"proxy"},
       {"tag":"twitter","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs","download_detour":"proxy"},
       {"tag":"youtube","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs","download_detour":"proxy"},
