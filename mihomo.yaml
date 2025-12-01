@@ -111,6 +111,7 @@ proxy-groups:
   - {name: AI, <<: *pr, proxies: [美国, 香港, 新加坡, 日本, 其他]}
 
 rules:
+  - DOMAIN-SUFFIX,steamserver.net,DIRECT
   - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT
   #- RULE-SET,AWAvenue-Ads,REJECT
   - RULE-SET,private,DIRECT
@@ -124,27 +125,27 @@ rules:
   - RULE-SET,google,代理
   - RULE-SET,gfw,代理
 
-  - IP-CIDR, 91.108.16.0/21, 新加坡, no-resolve
-  - IP-CIDR, 91.108.56.0/23, 新加坡, no-resolve
-  - IP-CIDR, 149.154.168.0/22, 新加坡, no-resolve
-  - IP-CIDR6, 2001:b28:f23c::/48, 新加坡, no-resolve
-  - IP-CIDR6, 2001:b28:f23f::/48, 新加坡, no-resolve
+  - IP-CIDR,91.108.16.0/21,新加坡,no-resolve
+  - IP-CIDR,91.108.56.0/23,新加坡,no-resolve
+  - IP-CIDR,149.154.168.0/22,新加坡,no-resolve
+  - IP-CIDR6,2001:b28:f23c::/48,新加坡,no-resolve
+  - IP-CIDR6,2001:b28:f23f::/48,新加坡,no-resolve
 
-  - IP-CIDR, 91.108.12.0/22, 美国, no-resolve
-  - IP-CIDR, 149.154.172.0/22, 美国, no-resolve
-  - IP-CIDR6, 2001:b28:f23d::/48, 美国, no-resolve
+  - IP-CIDR,91.108.12.0/22,美国,no-resolve
+  - IP-CIDR,149.154.172.0/22,美国,no-resolve
+  - IP-CIDR6,2001:b28:f23d::/48,美国,no-resolve
 
-  - IP-CIDR, 5.28.192.0/18, 欧洲, no-resolve
-  - IP-CIDR, 91.105.192.0/23, 欧洲, no-resolve
-  - IP-CIDR, 91.108.4.0/22, 欧洲, no-resolve
-  - IP-CIDR, 91.108.8.0/22, 欧洲, no-resolve
-  - IP-CIDR, 91.108.56.0/22, 欧洲, no-resolve
-  - IP-CIDR, 95.161.64.0/20, 欧洲, no-resolve
-  - IP-CIDR, 109.239.140.0/24, 欧洲, no-resolve
-  - IP-CIDR, 149.154.160.0/21, 欧洲, no-resolve
-  - IP-CIDR, 185.76.151.0/24, 欧洲, no-resolve
-  - IP-CIDR6, 2001:67c:4e8::/48, 欧洲, no-resolve
-  - IP-CIDR6, 2a0a:f280:203::/48, 欧洲, no-resolve
+  - IP-CIDR,5.28.192.0/18,欧洲,no-resolve
+  - IP-CIDR,91.105.192.0/23,欧洲,no-resolve
+  - IP-CIDR,91.108.4.0/22,欧洲,no-resolve
+  - IP-CIDR,91.108.8.0/22,欧洲,no-resolve
+  - IP-CIDR,91.108.56.0/22,欧洲,no-resolve
+  - IP-CIDR,95.161.64.0/20,欧洲,no-resolve
+  - IP-CIDR,109.239.140.0/24,欧洲,no-resolve
+  - IP-CIDR,149.154.160.0/21,欧洲,no-resolve
+  - IP-CIDR,185.76.151.0/24,欧洲,no-resolve
+  - IP-CIDR6,2001:67c:4e8::/48,欧洲,no-resolve
+  - IP-CIDR6,2a0a:f280:203::/48,欧洲,no-resolve
 
   - RULE-SET,cn,DIRECT
   - RULE-SET,cn_ip,DIRECT
