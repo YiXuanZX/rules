@@ -22,17 +22,7 @@
   },
   "route": {
     "rules": [
-      {
-        "type": "logical",
-        "mode": "or",
-        "rules": [
-          {"domain":["Mijia Cloud"]},
-          {"domain_suffix":["push.apple.com"]},
-          {"rule_set":["telegram_ip"]}
-        ],
-        "invert": true,
-        "action": "sniff"
-      },
+      {"domain":["Mijia Cloud"],"domain_suffix":["push.apple.com"],"rule_set":["telegram_ip"],"invert":true,"action":"sniff"},
       {"protocol":"dns","action":"hijack-dns"},
       {"clash_mode":"Global","outbound":"GLOBAL"},
       {"clash_mode":"Direct","outbound":"direct"},

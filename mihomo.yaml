@@ -20,7 +20,7 @@ external-controller: "[::]:9090"
 external-ui: ui
 external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
 
-unified-delay: false
+unified-delay: true
 tcp-concurrent: true
 find-process-mode: off
 global-client-fingerprint: ios
