@@ -10,7 +10,7 @@ proxy-providers:
     header: {User-Agent: ["sing-box/1.12.0"]}
 
 mixed-port: 7890
-log-level: warning
+log-level: error
 ipv6: true
 allow-lan: true
 
@@ -22,6 +22,9 @@ unified-delay: true
 tcp-concurrent: true
 find-process-mode: off
 global-client-fingerprint: ios
+
+keep-alive-idle: 300
+keep-alive-interval: 75
 
 profile:
   store-selected: true
