@@ -32,15 +32,19 @@ profile:
 
 sniffer:
   enable: true
-  override-destination: false
+  force-dns-mapping: false
+  parse-pure-ip: true
+  override-destination: true
   sniff:
     HTTP:
       ports: [80, 8080-8880]
       override-destination: true
     TLS:
       ports: [443, 8443]
+      override-destination: true
     QUIC:
       ports: [443, 8443]
+      override-destination: true
   skip-domain:
     - "Mijia Cloud"
     - "+.push.apple.com"
@@ -77,10 +81,6 @@ dns:
   fake-ip-range: 28.0.0.1/8
   fake-ip-range6: 2400::1/64
   fake-ip-filter:
-    - "*"
-    - "+.lan"
-    - "+.local"
-    - "+.arpa"
     - "+.market.xiaomi.com"
     - "lancache.steamcontent.com"
     #- "rule-set:AWAvenue-Ads"
@@ -89,15 +89,15 @@ dns:
   nameserver:
     - https://dns.alidns.com/dns-query
   nameserver-policy:
-    "*": system
     "+.arpa": system
-    "rule-set:private": system
+    "rule-set:gfw": "https://dns.google/dns-query#代理"
     #"rule-set:AWAvenue-Ads": rcode://name_error
-    "rule-set:cn": system
+  direct-nameserver: [system]
 
 hosts:
   dns.alidns.com: [223.5.5.5, 223.6.6.6]
   doh.pub: [1.12.12.21, 120.53.53.53]
+  dns.google: [8.8.8.8, 8.8.4.4]
 
 proxy-groups:
   - {name: 香港, <<: *select, filter: "(?i)香港|hong kong"}
