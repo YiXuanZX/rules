@@ -12,7 +12,7 @@
       {"clash_mode":"Global","query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":0},
       {"clash_mode":"Global","server":"proxy_dns"},
       {"clash_mode":"Direct","server":"direct_dns"},
-      {"domain_suffix":["market.xiaomi.com","lancache.steamcontent.com"],"server":"direct_dns"},
+      {"domain_suffix":[".arpa","market.xiaomi.com","lancache.steamcontent.com"],"server":"direct_dns"},
       {"query_type":["SVCB","HTTPS"],"action":"predefined","rcode":"NOTIMP"},
       {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":0},
       {"rule_set":"gfw","server":"proxy_dns"}
