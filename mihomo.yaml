@@ -83,7 +83,6 @@ dns:
   fake-ip-filter:
     - "+.market.xiaomi.com"
     - "lancache.steamcontent.com"
-    #- "rule-set:AWAvenue-Ads"
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver:
@@ -91,7 +90,6 @@ dns:
   nameserver-policy:
     "+.arpa": system
     "rule-set:gfw": "https://dns.google/dns-query#代理"
-    #"rule-set:AWAvenue-Ads": rcode://name_error
   direct-nameserver: [system]
 
 hosts:
@@ -115,7 +113,6 @@ proxy-groups:
 rules:
   - DOMAIN-SUFFIX,steamserver.net,DIRECT
   - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT
-  #- RULE-SET,AWAvenue-Ads,REJECT
   - RULE-SET,private,DIRECT
   - RULE-SET,private_ip,DIRECT,no-resolve
   - RULE-SET,ai,AI
