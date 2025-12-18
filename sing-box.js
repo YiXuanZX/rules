@@ -32,7 +32,7 @@ config.outbounds.map(i => {
     i.outbounds.push(...getTags(proxies, /伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands/i))
   }
   if (['other'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /^(?!.*(?:回家|流量|到期|过期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states)).*/i))
+    i.outbounds.push(...getTags(proxies, /^(?!.*(?:回家|流量|到期|过期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*/i))
   }
 })
 

@@ -32,19 +32,17 @@ profile:
 
 sniffer:
   enable: true
-  force-dns-mapping: false
+  force-dns-mapping: true
   parse-pure-ip: true
-  override-destination: true
+  override-destination: false
   sniff:
     HTTP:
       ports: [80, 8080-8880]
       override-destination: true
     TLS:
       ports: [443, 8443]
-      override-destination: true
     QUIC:
       ports: [443, 8443]
-      override-destination: true
   skip-domain:
     - "Mijia Cloud"
     - "+.push.apple.com"
@@ -88,9 +86,13 @@ dns:
   nameserver:
     - https://dns.alidns.com/dns-query
   nameserver-policy:
-    "+.arpa": system
-    "rule-set:gfw": "https://dns.google/dns-query#代理"
-  direct-nameserver: [system]
+    "*": "system"
+    "+.arpa": "system"
+    "rule-set:gfw":
+      - "https://dns.google/dns-query#代理"
+  direct-nameserver:
+    - system
+  use-hosts: true
 
 hosts:
   dns.alidns.com: [223.5.5.5, 223.6.6.6]
@@ -103,11 +105,11 @@ proxy-groups:
   - {name: 日本, <<: *select, filter: "(?i)日本|japan"}
   - {name: 美国, <<: *select, filter: "(?i)美国|united states"}
   - {name: 欧洲, <<: *select, filter: "(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"}
-  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:回家|流量|到期|过期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states)).*"}
+  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:回家|流量|到期|过期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*"}
 
-  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他]}
-  - {name: TG, <<: *pr, proxies: [PASS, 香港, 新加坡, 日本, 美国, 其他]}
-  - {name: AI, <<: *pr, proxies: [美国, 香港, 新加坡, 日本, 其他]}
+  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他]}
+  - {name: TG, <<: *pr, proxies: [PASS, 欧洲, 香港, 新加坡, 日本, 美国, 其他]}
+  - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 欧洲, 其他]}
   - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, TG, AI]}
 
 rules:
