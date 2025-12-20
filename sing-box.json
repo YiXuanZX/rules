@@ -5,7 +5,7 @@
       {"tag":"direct_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
       {"tag":"proxy_dns","type":"https","server":"cloudflare-dns.com","domain_resolver":"hosts","detour":"proxy"},
       {"tag":"local","type":"local"},
-      {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"28.0.0.0/8","inet6_range":"2400::/64"},
+      {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/15","inet6_range":"fc00::/64"},
       {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"doh.pub":["1.12.12.21","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4"],"cloudflare-dns.com":["104.16.248.249","104.16.249.249"]}}
     ],
     "rules": [
