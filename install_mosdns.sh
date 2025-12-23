@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -e
+
 cd /tmp
 
 wget https://git.apad.pro/https://github.com/pmkol/mosdns-x/releases/download/v25.12.05/mosdns-linux-arm64.zip
