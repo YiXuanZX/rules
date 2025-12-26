@@ -7,7 +7,7 @@ proxy-providers:
     <<: *p
     url: "此处填入订阅"
     path: ./proxy_providers/provider1.txt
-    header: {User-Agent: ["sing-box/1.12.0"]}
+    header: {User-Agent: ["clash-verge/v2.4.4"]}
 
 mixed-port: 7890
 log-level: error
