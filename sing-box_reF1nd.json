@@ -1,0 +1,106 @@
+{
+  "providers": [
+    {
+      "tag": "provider1",
+      "type": "remote",
+      "url": "此处填入订阅",
+      "user_agent": "sing-box/v1.12.0",
+      "download_detour": "direct",
+      "update_interval": "24h0m0s",
+      "health_check": {"enabled":true,"url":"https://www.gstatic.com/generate_204","interval":"10m0s","timeout":"3s"}
+    }
+  ],
+  "dns": {
+    "servers": [
+      {"tag":"proxy_server_dns","type":"https","server":"doh.pub","domain_resolver":"hosts"},
+      {"tag":"direct_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
+      {"tag":"proxy_dns","type":"https","server":"cloudflare-dns.com","domain_resolver":"hosts","detour":"proxy"},
+      {"tag":"local","type":"local"},
+      {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/15","inet6_range":"fc00::/64"},
+      {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"doh.pub":["1.12.12.21","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4"],"cloudflare-dns.com":["104.16.248.249","104.16.249.249"]}}
+    ],
+    "rules": [
+      {"clash_mode":"Global","query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":0},
+      {"clash_mode":"Global","server":"proxy_dns"},
+      {"clash_mode":"Direct","server":"direct_dns"},
+      {"domain_suffix":["market.xiaomi.com","lancache.steamcontent.com"],"server":"direct_dns"},
+      {"query_type":["SVCB","HTTPS"],"action":"predefined","rcode":"NOTIMP"},
+      {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":0},
+      {"domain_suffix":[".arpa"],"server":"local"},
+      {"rule_set":"gfw","server":"proxy_dns"}
+    ],
+    "final": "direct_dns",
+    "independent_cache": true,
+    "cache_capacity": 4096
+  },
+  "route": {
+    "rules": [
+      {"domain":["Mijia Cloud"],"domain_suffix":["push.apple.com"],"rule_set":["telegram_ip"],"invert":true,"action":"sniff"},
+      {"protocol":"dns","action":"hijack-dns"},
+      {"clash_mode":"Global","outbound":"GLOBAL"},
+      {"clash_mode":"Direct","outbound":"direct"},
+      {"domain_suffix":["steamserver.net"],"outbound":"direct"},
+      {"outbound":"tg-sg","ip_cidr":["91.108.16.0/21","91.108.56.0/23","149.154.168.0/22","2001:b28:f23c::/48","2001:b28:f23f::/48"]},
+      {"outbound":"tg-us","ip_cidr":["91.108.12.0/22","149.154.172.0/22","2001:b28:f23d::/48"]},
+      {"outbound":"tg-eu","ip_cidr":["5.28.192.0/18","91.105.192.0/23","91.108.4.0/22","91.108.8.0/22","91.108.56.0/22","95.161.64.0/20","109.239.140.0/24","149.154.160.0/21","185.76.151.0/24","2001:67c:4e8::/48","2a0a:f280:203::/48"]},
+      {"network":"icmp","outbound":"direct"},
+      {"protocol":"quic","rule_set":"youtube","action":"reject"},
+      {"ip_is_private":true,"outbound":"direct"},
+      {"rule_set":"private","outbound":"direct"},
+      {"rule_set":"ai","outbound":"ai"},
+      {"rule_set":["telegram","github","twitter","youtube","google","gfw"],"outbound":"proxy"},
+      {"rule_set":"cn","outbound":"direct"},
+      {"action":"resolve","match_only":true},
+      {"rule_set":"cn_ip","outbound":"direct"}
+    ],
+    "final": "proxy",
+    "auto_detect_interface": true,
+    "default_domain_resolver": "proxy_server_dns",
+    "default_domain_match_strategy": "prefer_fqdn",
+    "rule_set": [
+      {"tag":"AWAvenue-Ads","type":"remote","url":"https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox.json","download_detour":"proxy"},
+      {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs","download_detour":"proxy"},
+      {"tag":"ai","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/ai.srs","download_detour":"proxy"},
+      {"tag":"telegram","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs","download_detour":"proxy"},
+      {"tag":"telegram_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/telegramip.srs","download_detour":"proxy"},
+      {"tag":"github","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs","download_detour":"proxy"},
+      {"tag":"twitter","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs","download_detour":"proxy"},
+      {"tag":"youtube","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs","download_detour":"proxy"},
+      {"tag":"google","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs","download_detour":"proxy"},
+      {"tag":"gfw","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/gfw.srs","download_detour":"proxy"},
+      {"tag":"cn","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash-classical.srs","download_detour":"proxy"},
+      {"tag":"cn_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs","download_detour":"proxy"}
+    ]
+  },
+  "outbounds": [
+    {"tag":"hk","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)香港|hong kong"},
+    {"tag":"sg","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)(新加坡|狮城|singapore)"},
+    {"tag":"jp","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)日本|japan"},
+    {"tag":"us","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)美国|united states"},
+    {"tag":"eu","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
+    {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
+    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
+    {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
+    {"tag":"tg-sg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"sg"},
+    {"tag":"tg-us","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
+    {"tag":"tg-eu","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"eu"},
+    {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
+    {"tag":"direct","type":"direct","domain_resolver":"local"}
+  ],
+  "inbounds": [
+    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"auto_route":true,"auto_redirect":false,"platform":{"http_proxy":{"enabled":true,"server":"127.0.0.1","server_port":7890}}},
+    {"tag":"mixed-in","type":"mixed","listen":"127.0.0.1","listen_port":7890,"set_system_proxy":false}
+  ],
+  "log": {"level":"warn","timestamp":true},
+  "experimental": {
+    "urltest_unified_delay": true,
+    "cache_file": {"enabled":true,"store_fakeip":true,"store_rdrc":true},
+    "clash_api": {
+      "external_controller": "[::]:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "proxy",
+      "external_ui_update_interval": "24h0m0s"
+    }
+  }
+}

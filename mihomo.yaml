@@ -1,0 +1,210 @@
+pr: &pr {type: select, url: https://www.gstatic.com/generate_204, interval: 600, lazy: false}
+select: &select {include-all: true, type: select, url: https://www.gstatic.com/generate_204, interval: 600, lazy: false}
+p: &p {type: http, interval: 86400, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600, lazy: false}, proxy: DIRECT}
+
+proxy-providers:
+  provider1:
+    <<: *p
+    url: "此处填入订阅"
+    path: ./proxy_providers/provider1.txt
+    header: {User-Agent: ["clash-verge/v2.4.4"]}
+
+mixed-port: 7890
+log-level: error
+ipv6: true
+allow-lan: true
+
+external-controller: "[::]:9090"
+external-ui: ui
+external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: off
+global-client-fingerprint: ios
+
+keep-alive-idle: 300
+keep-alive-interval: 75
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+  skip-dst-address:
+    - 91.105.192.0/23
+    - 91.108.4.0/22
+    - 91.108.8.0/21
+    - 91.108.16.0/21
+    - 91.108.56.0/22
+    - 95.161.64.0/20
+    - 149.154.160.0/20
+    - 185.76.151.0/24
+    - 2001:67c:4e8::/48
+    - 2001:b28:f23c::/47
+    - 2001:b28:f23f::/48
+    - 2a0a:f280::/32
+
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "udp://any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+dns:
+  enable: true
+  ipv6: true
+  cache-algorithm: arc
+  listen: "[::]:1053"
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-range6: fc00::1/64
+  fake-ip-filter:
+    - "+.market.xiaomi.com"
+    - "lancache.steamcontent.com"
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+  nameserver:
+    - https://dns.alidns.com/dns-query
+  nameserver-policy:
+    "*": "system"
+    "+.arpa": "system"
+    "rule-set:gfw":
+      - "https://dns.google/dns-query#代理"
+  direct-nameserver:
+    - system
+  use-hosts: true
+
+hosts:
+  dns.alidns.com: [223.5.5.5, 223.6.6.6]
+  doh.pub: [1.12.12.21, 120.53.53.53]
+  dns.google: [8.8.8.8, 8.8.4.4]
+
+proxy-groups:
+  - {name: 香港, <<: *select, filter: "(?i)香港|hong kong"}
+  - {name: 新加坡, <<: *select, filter: "(?i)(新加坡|狮城|singapore)"}
+  - {name: 日本, <<: *select, filter: "(?i)日本|japan"}
+  - {name: 美国, <<: *select, filter: "(?i)美国|united states"}
+  - {name: 欧洲, <<: *select, filter: "(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"}
+  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*"}
+
+  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他]}
+  - {name: TG, <<: *pr, proxies: [PASS, 欧洲, 香港, 新加坡, 日本, 美国, 其他]}
+  - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 欧洲, 其他]}
+  - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, TG, AI]}
+
+rules:
+  - DOMAIN-SUFFIX,steamserver.net,DIRECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,private_ip,DIRECT,no-resolve
+  - RULE-SET,ai,AI
+  - RULE-SET,telegram,TG
+  - RULE-SET,telegram_ip,TG,no-resolve
+  - RULE-SET,github,代理
+  - RULE-SET,twitter,代理
+  - RULE-SET,youtube,代理
+  - RULE-SET,google,代理
+  - RULE-SET,gfw,代理
+
+  - IP-CIDR,91.108.16.0/21,新加坡,no-resolve
+  - IP-CIDR,91.108.56.0/23,新加坡,no-resolve
+  - IP-CIDR,149.154.168.0/22,新加坡,no-resolve
+  - IP-CIDR6,2001:b28:f23c::/48,新加坡,no-resolve
+  - IP-CIDR6,2001:b28:f23f::/48,新加坡,no-resolve
+
+  - IP-CIDR,91.108.12.0/22,美国,no-resolve
+  - IP-CIDR,149.154.172.0/22,美国,no-resolve
+  - IP-CIDR6,2001:b28:f23d::/48,美国,no-resolve
+
+  - IP-CIDR,5.28.192.0/18,欧洲,no-resolve
+  - IP-CIDR,91.105.192.0/23,欧洲,no-resolve
+  - IP-CIDR,91.108.4.0/22,欧洲,no-resolve
+  - IP-CIDR,91.108.8.0/22,欧洲,no-resolve
+  - IP-CIDR,91.108.56.0/22,欧洲,no-resolve
+  - IP-CIDR,95.161.64.0/20,欧洲,no-resolve
+  - IP-CIDR,109.239.140.0/24,欧洲,no-resolve
+  - IP-CIDR,149.154.160.0/21,欧洲,no-resolve
+  - IP-CIDR,185.76.151.0/24,欧洲,no-resolve
+  - IP-CIDR6,2001:67c:4e8::/48,欧洲,no-resolve
+  - IP-CIDR6,2a0a:f280:203::/48,欧洲,no-resolve
+
+  - RULE-SET,cn,DIRECT
+  - RULE-SET,cn_ip,DIRECT
+  - MATCH,代理
+
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs, proxy: 代理}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs, proxy: 代理}
+rule-providers:
+  AWAvenue-Ads:
+    <<: *domain
+    path: ./rule_providers/AWAvenue-Ads.mrs
+    url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs"
+  private:
+    <<: *domain
+    path: ./rule_providers/private.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+  private_ip:
+    <<: *ip
+    path: ./rule_providers/private_ip.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+  ai:
+    <<: *domain
+    path: ./rule_providers/ai.mrs
+    url: "https://raw.githubusercontent.com/JohnsonRan/CRules/mihomo/resources/rules/ai.mrs"
+  telegram:
+    <<: *domain
+    path: ./rule_providers/telegram.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+  telegram_ip:
+    <<: *ip
+    path: ./rule_providers/telegram_ip.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+  github:
+    <<: *domain
+    path: ./rule_providers/github.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+  twitter:
+    <<: *domain
+    path: ./rule_providers/twitter.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+  youtube:
+    <<: *domain
+    path: ./rule_providers/youtube.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+  google:
+    <<: *domain
+    path: ./rule_providers/google.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+  gfw:
+    <<: *domain
+    path: ./rule_providers/gfw.mrs
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/gfw.mrs"
+  cn:
+    <<: *domain
+    path: ./rule_providers/cn.mrs
+    url: "https://raw.githubusercontent.com/YiXuanZX/rules/main/cn-additional-list.mrs"
+  cn_ip:
+    <<: *ip
+    path: ./rule_providers/cn_ip.mrs
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cnip.mrs"
