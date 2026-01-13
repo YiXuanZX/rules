@@ -62,7 +62,7 @@ sniffer:
 
 tun:
   enable: true
-  stack: mixed
+  stack: system
   dns-hijack:
     - "udp://any:53"
     - "tcp://any:53"

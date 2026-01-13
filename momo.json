@@ -4,6 +4,6 @@
     {"tag":"mixed-in","type":"mixed","listen":"::","listen_port":7890},
     {"tag":"redirect-in","type":"redirect","listen":"::","listen_port":7891},
     {"tag":"tproxy-in","type":"tproxy","listen":"::","listen_port":7892},
-    {"tag":"tun-in","type":"tun","interface_name":"momo","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"]}
+    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"stack":"system","interface_name":"momo"}
   ]
 }
