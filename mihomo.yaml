@@ -112,6 +112,9 @@ proxy-groups:
   - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, TG, AI]}
 
 rules:
+  - DOMAIN,abyss.cyapi.cn,REJECT
+  - DOMAIN,ad.cyapi.cn,REJECT
+  - DOMAIN,gather.colorfulclouds.net,REJECT
   - DOMAIN-SUFFIX,steamserver.net,DIRECT
   - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT
   - RULE-SET,private,DIRECT
