@@ -21,7 +21,6 @@ external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-p
 unified-delay: true
 tcp-concurrent: true
 find-process-mode: off
-global-client-fingerprint: ios
 
 keep-alive-idle: 300
 keep-alive-interval: 75
