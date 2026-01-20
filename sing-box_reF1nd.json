@@ -22,10 +22,11 @@
     "rules": [
       {"clash_mode":"Global","server":"proxy_dns"},
       {"clash_mode":"Direct","server":"direct_dns"},
-      {"domain_suffix":["market.xiaomi.com","lancache.steamcontent.com"],"server":"direct_dns"},
+      {"domain_suffix":["market.xiaomi.com"],"server":"direct_dns"},
+      {"domain_suffix":["lancache.steamcontent.com"],"server":"proxy_dns"},
+      {"query_type":"PTR","server":"local"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
       {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
-      {"domain_suffix":[".arpa"],"server":"local"},
       {"rule_set":"gfw","server":"proxy_dns"}
     ],
     "final": "direct_dns",
@@ -36,6 +37,7 @@
     "rules": [
       {"domain":["Mijia Cloud"],"domain_suffix":["push.apple.com"],"rule_set":["telegram_ip"],"invert":true,"action":"sniff"},
       {"protocol":"dns","action":"hijack-dns"},
+      {"udp_disable_domain_unmapping":true,"udp_connect":true,"action":"route-options"},
       {"clash_mode":"Global","outbound":"GLOBAL"},
       {"clash_mode":"Direct","outbound":"direct"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
@@ -88,7 +90,7 @@
     {"tag":"direct","type":"direct","domain_resolver":"local"}
   ],
   "inbounds": [
-    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"stack":"system","auto_route":true,"auto_redirect":false,"platform":{"http_proxy":{"enabled":true,"server":"127.0.0.1","server_port":7890}}},
+    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"stack":"system","auto_route":true,"auto_redirect":false,"platform":{"http_proxy":{"enabled":true,"server":"127.0.0.1","server_port":7890,"bypass_domain":["*zhihu.com","*zhimg.com","*jd.com","100ime-iat-api.xfyun.cn","*360buyimg.com"]}}},
     {"tag":"mixed-in","type":"mixed","listen":"127.0.0.1","listen_port":7890,"set_system_proxy":false}
   ],
   "log": {"level":"warn","timestamp":true},
