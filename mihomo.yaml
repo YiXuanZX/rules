@@ -100,7 +100,7 @@ proxy-groups:
   - {name: 日本, <<: *select, filter: "(?i)日本|japan"}
   - {name: 美国, <<: *select, filter: "(?i)美国|united states"}
   - {name: 欧洲, <<: *select, filter: "(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"}
-  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*"}
+  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:优先|回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*"}
 
   - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他]}
   - {name: 直连, type: select, proxies: [v4优先, v6优先], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false}
