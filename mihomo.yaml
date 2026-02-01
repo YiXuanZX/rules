@@ -8,6 +8,14 @@ proxy-providers:
     url: "此处填入订阅"
     path: ./proxy_providers/provider1.txt
 
+proxies:
+  - name: v4优先
+    type: direct
+    ip-version: ipv4-prefer
+  - name: v6优先
+    type: direct
+    ip-version: ipv6-prefer
+
 mixed-port: 7890
 log-level: error
 ipv6: true
@@ -95,18 +103,19 @@ proxy-groups:
   - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*"}
 
   - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他]}
-  - {name: TG, <<: *pr, proxies: [PASS, 欧洲, 香港, 新加坡, 日本, 美国, 其他]}
+  - {name: 直连, type: select, proxies: [v4优先, v6优先], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false}
   - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 欧洲, 其他]}
-  - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, TG, AI]}
+  - {name: TG, <<: *pr, proxies: [PASS, 欧洲, 香港, 新加坡, 日本, 美国, 其他]}
+  - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, 直连, AI, TG]}
 
 rules:
   - DOMAIN,abyss.cyapi.cn,REJECT
   - DOMAIN,ad.cyapi.cn,REJECT
   - DOMAIN,gather.colorfulclouds.net,REJECT
-  - DOMAIN-SUFFIX,steamserver.net,DIRECT
+  - DOMAIN-SUFFIX,steamserver.net,直连
   - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT
-  - RULE-SET,private,DIRECT
-  - RULE-SET,private_ip,DIRECT,no-resolve
+  - RULE-SET,private,直连
+  - RULE-SET,private_ip,直连,no-resolve
   - RULE-SET,ai,AI
   - RULE-SET,telegram,TG
   - RULE-SET,telegram_ip,TG,no-resolve
@@ -138,18 +147,14 @@ rules:
   - IP-CIDR6,2001:67c:4e8::/48,欧洲,no-resolve
   - IP-CIDR6,2a0a:f280:203::/48,欧洲,no-resolve
 
-  - RULE-SET,cn,DIRECT
-  - RULE-SET,cn_ip,DIRECT
+  - RULE-SET,cn,直连
+  - RULE-SET,cn_ip,直连
   - MATCH,代理
 
 rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs, proxy: 代理}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs, proxy: 代理}
 rule-providers:
-  AWAvenue-Ads:
-    <<: *domain
-    path: ./rule_providers/AWAvenue-Ads.mrs
-    url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs"
   private:
     <<: *domain
     path: ./rule_providers/private.mrs

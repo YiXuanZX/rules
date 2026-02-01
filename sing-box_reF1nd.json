@@ -60,7 +60,6 @@
     "default_domain_resolver": "proxy_server_dns",
     "default_domain_match_strategy": "prefer_fqdn",
     "rule_set": [
-      {"tag":"AWAvenue-Ads","type":"remote","url":"https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox.json","download_detour":"proxy"},
       {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs","download_detour":"proxy"},
       {"tag":"ai","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/ai.srs","download_detour":"proxy"},
       {"tag":"telegram","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs","download_detour":"proxy"},
@@ -82,12 +81,14 @@
     {"tag":"eu","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
     {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
     {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
+    {"tag":"direct","type":"selector","outbounds":["v4优先","v6优先"],"default":"v4优先"},
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
     {"tag":"tg-sg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"sg"},
     {"tag":"tg-us","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
     {"tag":"tg-eu","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"eu"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
-    {"tag":"direct","type":"direct","domain_resolver":"local"}
+    {"tag":"v4优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv4"}},
+    {"tag":"v6优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv6"}}
   ],
   "inbounds": [
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"stack":"system","auto_route":true,"auto_redirect":false,"platform":{"http_proxy":{"enabled":true,"server":"127.0.0.1","server_port":7890,"bypass_domain":["*zhihu.com","*zhimg.com","*jd.com","100ime-iat-api.xfyun.cn","*360buyimg.com"]}}},
