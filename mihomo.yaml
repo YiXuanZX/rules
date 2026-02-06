@@ -166,7 +166,7 @@ rule-providers:
   ai:
     <<: *domain
     path: ./rule_providers/ai.mrs
-    url: "https://raw.githubusercontent.com/JohnsonRan/CRules/mihomo/resources/rules/ai.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/ai.mrs"
   telegram:
     <<: *domain
     path: ./rule_providers/telegram.mrs

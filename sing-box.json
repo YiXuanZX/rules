@@ -49,7 +49,7 @@
     "default_domain_resolver": "proxy_server_dns",
     "rule_set": [
       {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs","download_detour":"proxy"},
-      {"tag":"ai","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/ai.srs","download_detour":"proxy"},
+      {"tag":"ai","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ai.srs","download_detour":"proxy"},
       {"tag":"telegram","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs","download_detour":"proxy"},
       {"tag":"telegram_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/telegramip.srs","download_detour":"proxy"},
       {"tag":"github","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs","download_detour":"proxy"},
