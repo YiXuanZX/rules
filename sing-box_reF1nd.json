@@ -91,7 +91,7 @@
     {"tag":"v6优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv6"}}
   ],
   "inbounds": [
-    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"stack":"system","auto_route":true,"auto_redirect":false,"platform":{"http_proxy":{"enabled":true,"server":"127.0.0.1","server_port":7890,"bypass_domain":["*zhihu.com","*zhimg.com","*jd.com","100ime-iat-api.xfyun.cn","*360buyimg.com"]}}},
+    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"stack":"system","auto_route":true,"auto_redirect":false,"platform":{"http_proxy":{"enabled":false,"server":"127.0.0.1","server_port":7890,"bypass_domain":["*zhihu.com","*zhimg.com","*jd.com","100ime-iat-api.xfyun.cn","*360buyimg.com"]}}},
     {"tag":"mixed-in","type":"mixed","listen":"127.0.0.1","listen_port":7890,"set_system_proxy":false}
   ],
   "log": {"level":"warn","timestamp":true},
