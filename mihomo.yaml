@@ -1,6 +1,6 @@
 pr: &pr {type: select, url: https://www.gstatic.com/generate_204, interval: 600, lazy: false}
 select: &select {include-all: true, type: select, url: https://www.gstatic.com/generate_204, interval: 600, lazy: false}
-p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.4.5"]}, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600, lazy: false}}
+p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.4.6"]}, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600, lazy: false}}
 
 proxy-providers:
   provider1:

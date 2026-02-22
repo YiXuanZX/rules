@@ -4,7 +4,7 @@
       "tag": "provider1",
       "type": "remote",
       "url": "此处填入订阅",
-      "user_agent": "sing-box/v1.12.0",
+      "user_agent": "sing-box/v1.13.0",
       "download_detour": "direct",
       "update_interval": "24h0m0s",
       "health_check": {"enabled":true,"url":"https://www.gstatic.com/generate_204","interval":"10m0s","timeout":"3s"}
