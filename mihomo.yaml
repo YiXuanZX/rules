@@ -9,12 +9,14 @@ proxy-providers:
     path: ./proxy_providers/provider1.txt
 
 proxies:
-  - name: v4优先
+  - name: IPv4优先
     type: direct
     ip-version: ipv4-prefer
-  - name: v6优先
+  - name: IPv6优先
     type: direct
     ip-version: ipv6-prefer
+  - name: 双栈
+    type: direct
 
 mixed-port: 7890
 log-level: error
@@ -103,7 +105,7 @@ proxy-groups:
   - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:优先|回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*"}
 
   - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他]}
-  - {name: 直连, type: select, proxies: [v4优先, v6优先], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false}
+  - {name: 直连, type: select, proxies: [IPv4优先, IPv6优先, 双栈], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false}
   - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 欧洲, 其他]}
   - {name: TG, <<: *pr, proxies: [新加坡, 香港, 日本, 美国, 欧洲, 其他]}
   - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, 直连, AI, TG]}

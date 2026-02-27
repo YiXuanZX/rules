@@ -14,7 +14,7 @@
     "servers": [
       {"tag":"proxy_server_dns","type":"https","server":"doh.pub","domain_resolver":"hosts"},
       {"tag":"direct_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
-      {"tag":"proxy_dns","type":"https","server":"cloudflare-dns.com","domain_resolver":"hosts","detour":"proxy"},
+      {"tag":"proxy_dns","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
       {"tag":"local","type":"local"},
       {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/15","inet6_range":"fc00::/64"},
       {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"doh.pub":["1.12.12.21","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4"],"cloudflare-dns.com":["104.16.248.249","104.16.249.249"]}}
@@ -80,12 +80,13 @@
     {"tag":"eu","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
     {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
     {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
-    {"tag":"direct","type":"selector","outbounds":["v4优先","v6优先"],"default":"v4优先"},
+    {"tag":"direct","type":"selector","outbounds":["IPv4优先","IPv6优先","双栈"],"default":"IPv4优先"},
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
     {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"sg"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
-    {"tag":"v4优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv4"}},
-    {"tag":"v6优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv6"}}
+    {"tag":"IPv4优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv4"}},
+    {"tag":"IPv6优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv6"}},
+    {"tag":"双栈","type":"direct","domain_resolver":"local"}
   ],
   "inbounds": [
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"stack":"system","auto_route":true,"auto_redirect":false,"platform":{"http_proxy":{"enabled":false,"server":"127.0.0.1","server_port":7890,"bypass_domain":["*zhihu.com","*zhimg.com","*jd.com","100ime-iat-api.xfyun.cn","*360buyimg.com"]}}},
