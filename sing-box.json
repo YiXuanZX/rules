@@ -9,15 +9,14 @@
       {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"doh.pub":["1.12.12.21","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4"],"cloudflare-dns.com":["104.16.248.249","104.16.249.249"]}}
     ],
     "rules": [
-      {"clash_mode":"Global","query_type":["SVCB","HTTPS"],"action":"reject"},
-      {"clash_mode":"Global","query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
+      {"clash_mode":"Global","query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1,"strategy":"ipv4_only"},
       {"clash_mode":"Global","server":"proxy_dns"},
       {"clash_mode":"Direct","server":"direct_dns"},
       {"domain_suffix":["market.xiaomi.com"],"server":"direct_dns"},
       {"domain_suffix":["lancache.steamcontent.com"],"server":"proxy_dns"},
       {"query_type":"PTR","server":"local"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
-      {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
+      {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1,"strategy":"ipv4_only"},
       {"rule_set":"gfw","server":"proxy_dns"}
     ],
     "final": "direct_dns",
@@ -26,6 +25,7 @@
   },
   "route": {
     "rules": [
+      {"network":"icmp","outbound":"direct"},
       {"domain":["Mijia Cloud"],"domain_suffix":["push.apple.com"],"rule_set":["telegram_ip"],"invert":true,"action":"sniff"},
       {"protocol":"dns","action":"hijack-dns"},
       {"udp_disable_domain_unmapping":true,"udp_connect":true,"action":"route-options"},
@@ -33,7 +33,6 @@
       {"clash_mode":"Direct","outbound":"direct"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
       {"domain_suffix":["steamserver.net"],"outbound":"direct"},
-      {"network":"icmp","outbound":"direct"},
       {"protocol":"quic","rule_set":"youtube","action":"reject"},
       {"ip_is_private":true,"rule_set":"private","outbound":"direct"},
       {"rule_set":"ai","outbound":"ai"},
