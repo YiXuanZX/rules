@@ -78,7 +78,7 @@ dns:
     - "+.market.xiaomi.com"
     - "lancache.steamcontent.com"
   default-nameserver:
-    - 119.29.29.29
+    - https://223.6.6.6/dns-query
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver:
@@ -87,8 +87,7 @@ dns:
   nameserver-policy:
     "*": "system"
     "+.arpa": "system"
-    "rule-set:gfw":
-      - "https://dns.google/dns-query#代理"
+    "rule-set:gfw": ["https://dns.google/dns-query#代理"]
   direct-nameserver:
     - system
 
