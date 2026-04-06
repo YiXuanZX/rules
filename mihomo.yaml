@@ -98,18 +98,18 @@ hosts:
   d.atri.ink: [43.129.165.236]
 
 proxy-groups:
-  - {name: 香港, <<: *select, filter: "(?i)香港|hong kong"}
-  - {name: 新加坡, <<: *select, filter: "(?i)(新加坡|狮城|singapore)"}
-  - {name: 日本, <<: *select, filter: "(?i)日本|japan"}
-  - {name: 美国, <<: *select, filter: "(?i)美国|united states"}
-  - {name: 欧洲, <<: *select, filter: "(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"}
-  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:优先|双栈|回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*"}
+  - {name: 香港, <<: *select, filter: "(?i)香港|hong kong", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png"}
+  - {name: 新加坡, <<: *select, filter: "(?i)(新加坡|狮城|singapore)", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png"}
+  - {name: 日本, <<: *select, filter: "(?i)日本|japan", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png"}
+  - {name: 美国, <<: *select, filter: "(?i)美国|united states", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png"}
+  - {name: 欧洲, <<: *select, filter: "(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/European_Union.png"}
+  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:优先|双栈|回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_Nations.png"}
 
-  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他]}
-  - {name: 直连, type: select, proxies: [IPv4优先, IPv6优先, 双栈], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false}
-  - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 欧洲, 其他]}
-  - {name: TG, <<: *pr, proxies: [新加坡, 香港, 日本, 美国, 欧洲, 其他]}
-  - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, 直连, AI, TG]}
+  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/World_Map.png"}
+  - {name: 直连, type: select, proxies: [IPv4优先, IPv6优先, 双栈], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China_Map.png"}
+  - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png"}
+  - {name: TG, <<: *pr, proxies: [新加坡, 香港, 日本, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram.png"}
+  - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, 直连, AI, TG], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
 
 rules:
   - DOMAIN,abyss.cyapi.cn,REJECT
