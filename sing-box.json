@@ -25,14 +25,13 @@
   "route": {
     "rules": [
       {"network":"icmp","outbound":"direct"},
-      {"domain":["Mijia Cloud"],"domain_suffix":["push.apple.com"],"rule_set":["telegram_ip"],"invert":true,"action":"sniff"},
-      {"protocol":"dns","action":"hijack-dns"},
+      {"port":53,"action":"hijack-dns"},
       {"udp_disable_domain_unmapping":true,"udp_connect":true,"action":"route-options"},
       {"clash_mode":"Global","outbound":"proxy"},
       {"clash_mode":"Direct","outbound":"direct"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
       {"domain_suffix":["steamserver.net"],"outbound":"direct"},
-      {"protocol":"quic","rule_set":"youtube","action":"reject"},
+      {"network":"udp","port":443,"rule_set":"youtube","action":"reject"},
       {"ip_is_private":true,"rule_set":"private","outbound":"direct"},
       {"rule_set":"ai","outbound":"ai"},
       {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
