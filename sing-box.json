@@ -89,7 +89,7 @@
   ],
   "log": {"level":"warn","timestamp":true},
   "experimental": {
-    "cache_file": {"enabled":true,"store_fakeip":true,"store_rdrc":false},
+    "cache_file": {"enabled":true,"store_fakeip":true,"store_rdrc":true},
     "clash_api": {
       "external_controller": "[::]:9090",
       "external_ui": "ui",
