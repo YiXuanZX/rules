@@ -29,30 +29,30 @@
       {"rule_set":"gfw","server":"proxy_dns"}
     ],
     "final": "direct_dns",
-    "independent_cache": true,
+    "optimistic": true,
     "cache_capacity": 8192
   },
   "route": {
     "rules": [
       {"network":"icmp","outbound":"direct"},
       {"port":53,"action":"hijack-dns"},
-      {"udp_disable_domain_unmapping":true,"udp_connect":true,"action":"route-options"},
+      {"network":"udp","action":"resolve"},
       {"clash_mode":"Global","outbound":"proxy"},
       {"clash_mode":"Direct","outbound":"direct"},
+      {"network":"udp","port":443,"action":"reject"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
       {"domain_suffix":["steamserver.net"],"outbound":"direct"},
-      {"network":"udp","port":443,"rule_set":"youtube","action":"reject"},
       {"ip_is_private":true,"rule_set":"private","outbound":"direct"},
       {"rule_set":"ai","outbound":"ai"},
       {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
       {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
       {"rule_set":"cn","outbound":"direct"},
-      {"action":"resolve","server":"direct_dns"},
+      {"network":"tcp","action":"resolve"},
       {"rule_set":"cn_ip","outbound":"direct"}
     ],
     "final": "proxy",
     "auto_detect_interface": true,
-    "default_domain_resolver": {"server":"proxy_server_dns","disable_cache":true},
+    "default_domain_resolver": {"server":"proxy_server_dns","disable_optimistic_cache":true},
     "rule_set": [
       {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs","download_detour":"proxy"},
       {"tag":"ai","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ai.srs","download_detour":"proxy"},
@@ -89,7 +89,7 @@
   ],
   "log": {"level":"warn","timestamp":true},
   "experimental": {
-    "cache_file": {"enabled":true,"store_fakeip":true,"store_rdrc":true},
+    "cache_file": {"enabled":true,"store_fakeip":true,"store_dns":true},
     "clash_api": {
       "external_controller": "[::]:9090",
       "external_ui": "ui",

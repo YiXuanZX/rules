@@ -77,6 +77,7 @@ dns:
   fake-ip-filter:
     - "+.market.xiaomi.com"
     - "lancache.steamcontent.com"
+    - "rule-set:private"
   default-nameserver:
     - https://223.6.6.6/dns-query
   proxy-server-nameserver:
@@ -87,7 +88,6 @@ dns:
     - https://pz.fyi/dns-query
     #- https://d.atri.ink/dns-query
   nameserver-policy:
-    "rule-set:bytedance": [180.184.1.1]
     "rule-set:private,cn": [system]
     "rule-set:gfw": ["https://dns.google/dns-query#代理"]
   direct-nameserver:
@@ -111,7 +111,7 @@ proxy-groups:
   - {name: 日本, <<: *select, filter: "(?i)日本|japan", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png"}
   - {name: 美国, <<: *select, filter: "(?i)美国|united states", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png"}
   - {name: 欧洲, <<: *select, filter: "(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/European_Union.png"}
-  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:优先|双栈|回家|剩余|到期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_Nations.png"}
+  - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:优先|双栈|回家|剩余|到期|时期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_Nations.png"}
 
   - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/World_Map.png"}
   - {name: 直连, type: select, proxies: [IPv4优先, IPv6优先, 双栈], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China_Map.png"}
@@ -143,10 +143,6 @@ rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs, proxy: 代理}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs, proxy: 代理}
 rule-providers:
-  bytedance:
-    <<: *domain
-    path: ./rule_providers/bytedance.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bytedance.mrs"
   private:
     <<: *domain
     path: ./rule_providers/private.mrs
