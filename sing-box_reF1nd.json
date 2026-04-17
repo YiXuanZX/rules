@@ -102,7 +102,7 @@
   ],
   "log": {"level":"warn","timestamp":true},
   "http_clients": [
-    {"tag":"direct_download","detour":"direct"},
+    {"tag":"direct_download","domain_resolver":"direct_dns"},
     {"tag":"proxy_download","detour":"proxy"}
   ],
   "experimental": {
