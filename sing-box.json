@@ -53,6 +53,7 @@
     "final": "proxy",
     "auto_detect_interface": true,
     "default_domain_resolver": {"server":"proxy_server_dns","disable_optimistic_cache":true},
+    "default_http_client": "direct_download",
     "rule_set": [
       {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs","http_client":"proxy_download"},
       {"tag":"ai","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ai.srs","http_client":"proxy_download"},
