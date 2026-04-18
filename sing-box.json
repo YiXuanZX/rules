@@ -55,17 +55,17 @@
     "default_domain_resolver": {"server":"proxy_server_dns","disable_optimistic_cache":true},
     "default_http_client": "direct_download",
     "rule_set": [
-      {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs","http_client":"proxy_download"},
-      {"tag":"ai","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ai.srs","http_client":"proxy_download"},
-      {"tag":"telegram","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs","http_client":"proxy_download"},
-      {"tag":"telegram_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/telegramip.srs","http_client":"proxy_download"},
-      {"tag":"github","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs","http_client":"proxy_download"},
-      {"tag":"twitter","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs","http_client":"proxy_download"},
-      {"tag":"youtube","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs","http_client":"proxy_download"},
-      {"tag":"google","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs","http_client":"proxy_download"},
-      {"tag":"gfw","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/gfw.srs","http_client":"proxy_download"},
-      {"tag":"cn","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash-classical.srs","http_client":"proxy_download"},
-      {"tag":"cn_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs","http_client":"proxy_download"}
+      {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs"},
+      {"tag":"ai","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ai.srs"},
+      {"tag":"telegram","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs"},
+      {"tag":"telegram_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/telegramip.srs"},
+      {"tag":"github","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs"},
+      {"tag":"twitter","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs"},
+      {"tag":"youtube","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs"},
+      {"tag":"google","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs"},
+      {"tag":"gfw","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/gfw.srs"},
+      {"tag":"cn","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash-classical.srs"},
+      {"tag":"cn_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs"}
     ]
   },
   "outbounds": [
@@ -88,7 +88,7 @@
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"auto_route":true,"auto_redirect":false},
     {"tag":"mixed-in","type":"mixed","listen":"127.0.0.1","listen_port":7890,"set_system_proxy":false}
   ],
-  "log": {"level":"warn","timestamp":true},
+  "log": {"level":"warn","output":"box.log","timestamp":true},
   "http_clients": [
     {"tag":"direct_download","domain_resolver":"direct_dns"},
     {"tag":"proxy_download","detour":"proxy"}
@@ -98,8 +98,7 @@
     "clash_api": {
       "external_controller": "[::]:9090",
       "external_ui": "ui",
-      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip",
-      "external_ui_http_client": "proxy_download"
+      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip"
     }
   }
 }
