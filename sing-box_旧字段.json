@@ -1,0 +1,101 @@
+{
+  "dns": {
+    "servers": [
+      {"tag":"proxy_server_dns","type":"https","server":"doh.pub","domain_resolver":"hosts"},
+      {"tag":"direct_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
+      {"tag":"proxy_dns","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
+      {"tag":"local","type":"local"},
+      {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/15"},
+      {
+        "tag": "hosts",
+        "type": "hosts",
+        "predefined": {
+          "dns.alidns.com": ["223.5.5.5","223.6.6.6"],
+          "doh.pub": ["1.12.12.12","120.53.53.53"],
+          "dns.google": ["8.8.8.8","8.8.4.4"],
+          "cloudflare-dns.com": ["104.16.248.249","104.16.249.249"]
+        }
+      }
+    ],
+    "rules": [
+      {"clash_mode":"Global","query_type":"AAAA","action":"predefined"},
+      {"clash_mode":"Global","server":"proxy_dns"},
+      {"clash_mode":"Direct","server":"direct_dns"},
+      {"domain":["lancache.steamcontent.com"],"domain_suffix":["market.xiaomi.com"],"server":"direct_dns"},
+      {"rule_set":"private","server":"local"},
+      {"query_type":["SVCB","HTTPS"],"action":"reject"},
+      {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
+      {"rule_set":"gfw","server":"proxy_dns"}
+    ],
+    "final": "direct_dns",
+    "optimistic": true,
+    "cache_capacity": 8192
+  },
+  "route": {
+    "rules": [
+      {"network":"icmp","outbound":"direct"},
+      {"port":53,"action":"hijack-dns"},
+      {"network":"udp","action":"resolve"},
+      {"clash_mode":"Global","outbound":"proxy"},
+      {"clash_mode":"Direct","outbound":"direct"},
+      {"network":"udp","port":443,"action":"reject"},
+      {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
+      {"rule_set":"ai","outbound":"ai"},
+      {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
+      {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
+      {"domain_suffix":["steamserver.net"],"ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
+      {"network":"tcp","action":"resolve"},
+      {"rule_set":"cn_ip","outbound":"direct"}
+    ],
+    "final": "proxy",
+    "auto_detect_interface": true,
+    "default_domain_resolver": {"server":"proxy_server_dns","disable_optimistic_cache":true},
+    "default_http_client": "proxy_download",
+    "rule_set": [
+      {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs"},
+      {"tag":"ai","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ai.srs"},
+      {"tag":"telegram","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs"},
+      {"tag":"telegram_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/telegramip.srs"},
+      {"tag":"github","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs"},
+      {"tag":"twitter","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs"},
+      {"tag":"youtube","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs"},
+      {"tag":"google","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs"},
+      {"tag":"gfw","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/gfw.srs"},
+      {"tag":"cn","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash-classical.srs"},
+      {"tag":"cn_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs"}
+    ]
+  },
+  "outbounds": [
+    {"tag":"hk","type":"selector","outbounds":[]},
+    {"tag":"sg","type":"selector","outbounds":[]},
+    {"tag":"jp","type":"selector","outbounds":[]},
+    {"tag":"us","type":"selector","outbounds":[]},
+    {"tag":"eu","type":"selector","outbounds":[]},
+    {"tag":"other","type":"selector","outbounds":[]},
+    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
+    {"tag":"direct","type":"selector","outbounds":["IPv4优先","IPv6优先","双栈"],"default":"IPv4优先"},
+    {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
+    {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"sg"},
+    {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
+    {"tag":"IPv4优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv4"}},
+    {"tag":"IPv6优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv6"}},
+    {"tag":"双栈","type":"direct","domain_resolver":"local"}
+  ],
+  "inbounds": [
+    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"auto_route":true,"auto_redirect":false},
+    {"tag":"mixed-in","type":"mixed","listen":"127.0.0.1","listen_port":7890,"set_system_proxy":false}
+  ],
+  "log": {"level":"warn","output":"box.log","timestamp":true},
+  "http_clients": [
+    {"tag":"direct_download","domain_resolver":"direct_dns"},
+    {"tag":"proxy_download","detour":"proxy"}
+  ],
+  "experimental": {
+    "cache_file": {"enabled":true,"store_fakeip":true,"store_dns":true},
+    "clash_api": {
+      "external_controller": "[::]:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip"
+    }
+  }
+}
