@@ -27,7 +27,7 @@
       }
     ],
     "rules": [
-      {"clash_mode":"Global","query_type":"AAAA","action":"reject"},
+      {"clash_mode":"Global","query_type":"AAAA","action":"predefined"},
       {"clash_mode":"Global","server":"proxy_dns"},
       {"clash_mode":"Direct","server":"direct_dns"},
       {"domain_suffix":["market.xiaomi.com","steamcontent.com"],"server":"direct_dns"},
