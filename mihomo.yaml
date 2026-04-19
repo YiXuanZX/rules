@@ -105,6 +105,9 @@ rules:
   - DOMAIN,abyss.cyapi.cn,REJECT
   - DOMAIN,ad.cyapi.cn,REJECT
   - DOMAIN,gather.colorfulclouds.net,REJECT
+  - DOMAIN,a.nel.cloudflare.com,直连
+  - DOMAIN,challenges.cloudflare.com,直连
+  - DOMAIN,static.cloudflareinsights.com,直连
   - DOMAIN-SUFFIX,steamserver.net,直连
   - RULE-SET,private,直连
   - RULE-SET,private_ip,直连,no-resolve
