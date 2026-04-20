@@ -29,7 +29,8 @@
       {"action":"evaluate","server":"direct_dns"},
       {"match_response":true,"rule_set":"cn_ip","action":"respond"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
-      {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1}
+      {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
+      {"rule_set":"gfw","server":"proxy_dns"}
     ],
     "final": "direct_dns",
     "optimistic": true,
