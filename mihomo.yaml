@@ -65,8 +65,8 @@ dns:
     - https://doh.pub/dns-query
   nameserver:
     #- https://dns.alidns.com/dns-query
-    #- https://mosdns.apad.pro/api-query
-    - https://pz.fyi/dns-query
+    - https://mosdns.apad.pro/api-query#ecs=192.168.1.0/24
+    #- https://pz.fyi/dns-query
     #- https://d.atri.ink/dns-query
   nameserver-policy:
     "rule-set:private,cn": [system]
