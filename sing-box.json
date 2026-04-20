@@ -26,7 +26,7 @@
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
       {"rule_set":["ai","telegram","github","twitter","youtube","google","gfw"],"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
       {"rule_set":"cn","server":"local"},
-      {"action":"evaluate","server":"direct_dns"},
+      {"query_type":["A","AAAA"],"action":"evaluate","server":"direct_dns"},
       {"match_response":true,"rule_set":"cn_ip","action":"respond"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
       {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
