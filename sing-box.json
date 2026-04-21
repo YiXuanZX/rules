@@ -21,20 +21,20 @@
       {"clash_mode":"Global","query_type":"AAAA","action":"predefined"},
       {"clash_mode":"Global","server":"proxy_dns"},
       {"clash_mode":"Direct","server":"direct_dns"},
-      {"domain":["lancache.steamcontent.com"],"domain_suffix":["market.xiaomi.com"],"server":"direct_dns"},
+      {"domain":"lancache.steamcontent.com","domain_suffix":"market.xiaomi.com","server":"direct_dns"},
       {"rule_set":"private","server":"local"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
       {"rule_set":["ai","telegram","github","twitter","youtube","google","gfw"],"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
       {"rule_set":"cn","server":"local"},
       {"query_type":["A","AAAA"],"action":"evaluate","server":"direct_dns"},
-      {"match_response":true,"rule_set":"cn_ip","action":"respond"},
+      {"rule_set":"cn_ip","match_response":true,"action":"respond"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
       {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
       {"rule_set":"gfw","server":"proxy_dns"}
     ],
     "final": "direct_dns",
-    "optimistic": true,
-    "cache_capacity": 8192
+    "cache_capacity": 8192,
+    "optimistic": true
   },
   "route": {
     "rules": [
@@ -47,12 +47,8 @@
       {"rule_set":"ai","outbound":"ai"},
       {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
       {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
-      {"domain_suffix":["steamserver.net"],"ip_is_private":true,"rule_set":["private","cn","cn_ip"],"outbound":"direct"}
+      {"domain_suffix":"steamserver.net","ip_is_private":true,"rule_set":["private","cn","cn_ip"],"outbound":"direct"}
     ],
-    "final": "proxy",
-    "auto_detect_interface": true,
-    "default_domain_resolver": {"server":"proxy_server_dns","disable_optimistic_cache":true},
-    "default_http_client": "proxy_download",
     "rule_set": [
       {"tag":"private","type":"remote","url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs"},
       {"tag":"ai","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ai.srs"},
@@ -65,7 +61,11 @@
       {"tag":"gfw","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/gfw.srs"},
       {"tag":"cn","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash-classical.srs"},
       {"tag":"cn_ip","type":"remote","url":"https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs"}
-    ]
+    ],
+    "final": "proxy",
+    "auto_detect_interface": true,
+    "default_domain_resolver": {"server":"proxy_server_dns","disable_optimistic_cache":true},
+    "default_http_client": "proxy_download"
   },
   "outbounds": [
     {"tag":"hk","type":"selector","outbounds":[]},
