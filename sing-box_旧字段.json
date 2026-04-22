@@ -87,7 +87,7 @@
   ],
   "log": {"level":"warn","output":"box.log","timestamp":true},
   "http_clients": [
-    {"tag":"direct_download","domain_resolver":"direct_dns"},
+    {"tag":"direct_download","detour":"direct"},
     {"tag":"proxy_download","detour":"proxy"}
   ],
   "experimental": {
