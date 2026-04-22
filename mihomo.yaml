@@ -170,7 +170,7 @@ rule-providers:
   cn:
     <<: *domain
     path: ./rule_providers/cn.mrs
-    url: "https://raw.githubusercontent.com/YiXuanZX/rules/main/cn-additional-list.mrs"
+    url: "https://static-file-global.353355.xyz/rules/cn-additional-list.mrs"
   cn_ip:
     <<: *ip
     path: ./rule_providers/cn_ip.mrs
