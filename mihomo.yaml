@@ -6,7 +6,7 @@ proxy-providers:
   provider1:
     <<: *p
     url: "此处填入订阅"
-    path: ./proxy_providers/provider1.txt
+    path: ./proxy_providers/provider1.yaml
 
 proxies:
   - name: IPv4优先
