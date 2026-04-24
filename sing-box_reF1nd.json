@@ -50,9 +50,9 @@
       {"clash_mode":"Direct","outbound":"direct"},
       {"network":"udp","port":443,"action":"reject"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
-      {"rule_set":"ai","outbound":"ai"},
+      {"rule_set":["ai","youtube","google"],"outbound":"ai"},
       {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
-      {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
+      {"rule_set":["github","twitter","gfw"],"outbound":"proxy"},
       {"domain_suffix":"steamserver.net","ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
       {"network":"tcp","action":"resolve","match_only":true},
       {"rule_set":"cn_ip","outbound":"direct"}

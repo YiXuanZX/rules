@@ -116,8 +116,8 @@ rules:
   - RULE-SET,telegram_ip,TG,no-resolve
   - RULE-SET,github,代理
   - RULE-SET,twitter,代理
-  - RULE-SET,youtube,代理
-  - RULE-SET,google,代理
+  - RULE-SET,youtube,AI
+  - RULE-SET,google,AI
   - RULE-SET,gfw,代理
   - RULE-SET,cn,直连
   - RULE-SET,cn_ip,直连
