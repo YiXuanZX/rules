@@ -101,7 +101,7 @@ proxy-groups:
   - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, 直连, AI, TG], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
 
 rules:
-  - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((RULE-SET,cn)))),REJECT
   - DOMAIN,abyss.cyapi.cn,REJECT
   - DOMAIN,ad.cyapi.cn,REJECT
   - DOMAIN,gather.colorfulclouds.net,REJECT
@@ -121,6 +121,7 @@ rules:
   - RULE-SET,gfw,代理
   - RULE-SET,cn,直连
   - RULE-SET,cn_ip,直连
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((RULE-SET,cn_ip)))),REJECT
   - MATCH,代理
 
 rule-anchor:
