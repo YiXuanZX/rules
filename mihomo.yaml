@@ -139,7 +139,7 @@ rule-providers:
   ai:
     <<: *domain
     path: ./rule_providers/ai.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/ai.mrs"
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
   telegram:
     <<: *domain
     path: ./rule_providers/telegram.mrs
@@ -167,7 +167,7 @@ rule-providers:
   gfw:
     <<: *domain
     path: ./rule_providers/gfw.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/gfw.mrs"
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
   cn:
     <<: *domain
     path: ./rule_providers/cn.mrs
@@ -175,4 +175,4 @@ rule-providers:
   cn_ip:
     <<: *ip
     path: ./rule_providers/cn_ip.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cnip.mrs"
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
