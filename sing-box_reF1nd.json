@@ -11,7 +11,7 @@
   ],
   "dns": {
     "servers": [
-      {"tag":"proxy_server_dns","type":"https","server":"doh.pub","domain_resolver":"hosts"},
+      {"tag":"server_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
       {"tag":"direct_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
       {"tag":"proxy_dns","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
       {"tag":"local","type":"local"},
@@ -48,12 +48,12 @@
       {"network":"udp","action":"resolve"},
       {"clash_mode":"Global","outbound":"proxy"},
       {"clash_mode":"Direct","outbound":"direct"},
-      {"network":"udp","port":443,"action":"reject"},
+      {"network":"udp","port":443,"rule_set":"youtube","action":"reject"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
-      {"rule_set":["ai","youtube","google"],"outbound":"ai"},
+      {"rule_set":"ai","outbound":"ai"},
       {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
-      {"rule_set":["github","twitter","gfw"],"outbound":"proxy"},
-      {"domain_suffix":"steamserver.net","ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
+      {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
+      {"domain":["a.nel.cloudflare.com","challenges.cloudflare.com","static.cloudflareinsights.com"],"domain_suffix":"steamserver.net","ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
       {"network":"tcp","action":"resolve","match_only":true},
       {"rule_set":"cn_ip","outbound":"direct"}
     ],
@@ -72,7 +72,7 @@
     ],
     "final": "proxy",
     "auto_detect_interface": true,
-    "default_domain_resolver": {"server":"proxy_server_dns","disable_optimistic_cache":true},
+    "default_domain_resolver": {"server":"server_dns","disable_optimistic_cache":true},
     "default_http_client": "proxy_download",
     "default_domain_match_strategy": "prefer_fqdn"
   },
@@ -83,14 +83,14 @@
     {"tag":"us","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)美国|united states"},
     {"tag":"eu","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
     {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)回家|剩余|到期|时期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
-    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
+    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"jp"},
     {"tag":"direct","type":"selector","outbounds":["IPv4优先","IPv6优先","双栈"],"default":"IPv4优先"},
-    {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
+    {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"jp"},
     {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"sg"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
-    {"tag":"IPv4优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv4"}},
-    {"tag":"IPv6优先","type":"direct","domain_resolver":{"server":"local","strategy":"prefer_ipv6"}},
-    {"tag":"双栈","type":"direct","domain_resolver":"local"}
+    {"tag":"IPv4优先","type":"direct","domain_resolver":{"server":"direct_dns","strategy":"prefer_ipv4"}},
+    {"tag":"IPv6优先","type":"direct","domain_resolver":{"server":"direct_dns","strategy":"prefer_ipv6"}},
+    {"tag":"双栈","type":"direct","domain_resolver":"direct_dns"}
   ],
   "inbounds": [
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"auto_route":true,"auto_redirect":false},
