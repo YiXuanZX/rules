@@ -62,29 +62,16 @@ dns:
   default-nameserver:
     - https://223.6.6.6/dns-query
   proxy-server-nameserver:
-    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
   nameserver:
     #- https://dns.alidns.com/dns-query
     - https://mosdns.apad.pro/api-query#ecs=192.168.1.0/24
-    #- https://pz.fyi/dns-query
-    #- https://d.atri.ink/dns-query
   nameserver-policy:
     "rule-set:private,cn": [system]
-    "rule-set:gfw": ["https://dns.google/dns-query#代理"]
-  direct-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-  direct-nameserver-follow-policy: true
 
 hosts:
   dns.alidns.com: [223.5.5.5, 223.6.6.6]
-  doh.pub: [1.12.12.12, 120.53.53.53]
-  dns.google: [8.8.8.8, 8.8.4.4]
   mosdns.apad.pro: 117.50.76.202
-  pz.fyi: 106.54.11.55
-  d.atri.ink: 43.129.165.236
-  "+.mcdn.bilivideo.com": 0.0.0.0
-  "+.mcdn.bilivideo.cn": 0.0.0.0
 
 proxy-groups:
   - {name: 香港, <<: *select, filter: "(?i)香港|hong kong", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png"}
@@ -94,14 +81,14 @@ proxy-groups:
   - {name: 欧洲, <<: *select, filter: "(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/European_Union.png"}
   - {name: 其他, <<: *select, filter: "(?i)^(?!.*(?:优先|双栈|回家|剩余|到期|时期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_Nations.png"}
 
-  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/World_Map.png"}
+  - {name: 代理, <<: *pr, proxies: [日本, 香港, 新加坡, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/World_Map.png"}
   - {name: 直连, type: select, proxies: [IPv4优先, IPv6优先, 双栈], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China_Map.png"}
-  - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png"}
-  - {name: TG, <<: *pr, proxies: [新加坡, 香港, 日本, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram.png"}
+  - {name: AI, <<: *pr, proxies: [日本, 香港, 新加坡, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png"}
+  - {name: TG, <<: *pr, proxies: [新加坡, 日本, 香港, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram.png"}
   - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, 直连, AI, TG], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
 
 rules:
-  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((RULE-SET,cn)))),REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT
   - DOMAIN,abyss.cyapi.cn,REJECT
   - DOMAIN,ad.cyapi.cn,REJECT
   - DOMAIN,gather.colorfulclouds.net,REJECT
@@ -116,12 +103,11 @@ rules:
   - RULE-SET,telegram_ip,TG,no-resolve
   - RULE-SET,github,代理
   - RULE-SET,twitter,代理
-  - RULE-SET,youtube,AI
-  - RULE-SET,google,AI
+  - RULE-SET,youtube,代理
+  - RULE-SET,google,代理
   - RULE-SET,gfw,代理
   - RULE-SET,cn,直连
   - RULE-SET,cn_ip,直连
-  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((RULE-SET,cn_ip)))),REJECT
   - MATCH,代理
 
 rule-anchor:
