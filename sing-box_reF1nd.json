@@ -16,16 +16,7 @@
       {"tag":"proxy_dns","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
       {"tag":"local","type":"local"},
       {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/15"},
-      {
-        "tag": "hosts",
-        "type": "hosts",
-        "predefined": {
-          "dns.alidns.com": ["223.5.5.5","223.6.6.6"],
-          "doh.pub": ["1.12.12.12","120.53.53.53"],
-          "dns.google": ["8.8.8.8","8.8.4.4"],
-          "cloudflare-dns.com": ["104.16.248.249","104.16.249.249"]
-        }
-      }
+      {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"dns.google":["8.8.8.8","8.8.4.4"]}}
     ],
     "rules": [
       {"clash_mode":"Global","query_type":"AAAA","action":"predefined"},
