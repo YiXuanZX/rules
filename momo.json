@@ -7,3 +7,13 @@
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"interface_name":"momo"}
   ]
 }
+①
+需要自行替换inbounds字段下的所有内容
+
+②
+auto_detect_interface需要关闭或删除
+
+③
+{"port":53,"action":"hijack-dns"}
+需要替换为
+{"inbound":"dns-in","action":"hijack-dns"}
