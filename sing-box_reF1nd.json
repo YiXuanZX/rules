@@ -44,7 +44,7 @@
       {"rule_set":"ai","outbound":"ai"},
       {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
       {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
-      {"domain":["a.nel.cloudflare.com","challenges.cloudflare.com","static.cloudflareinsights.com"],"domain_suffix":"steamserver.net","ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
+      {"domain":["a.nel.cloudflare.com","challenges.cloudflare.com","static.cloudflareinsights.com"],"ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
       {"network":"tcp","action":"resolve","match_only":true},
       {"rule_set":"cn_ip","outbound":"direct"}
     ],
