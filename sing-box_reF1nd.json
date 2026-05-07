@@ -35,7 +35,6 @@
   "route": {
     "rules": [
       {"network":"icmp","outbound":"direct"},
-      {"port":53,"action":"hijack-dns"},
       {"network":"udp","action":"resolve"},
       {"clash_mode":"Global","outbound":"proxy"},
       {"clash_mode":"Direct","outbound":"direct"},
@@ -68,12 +67,12 @@
     "default_domain_match_strategy": "prefer_fqdn"
   },
   "outbounds": [
-    {"tag":"hk","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)香港|hong kong"},
-    {"tag":"sg","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)(新加坡|狮城|singapore)"},
-    {"tag":"jp","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)日本|japan"},
-    {"tag":"us","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)美国|united states"},
-    {"tag":"eu","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
-    {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)回家|剩余|到期|时期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands"},
+    {"tag":"hk","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)香港"},
+    {"tag":"sg","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)新加坡"},
+    {"tag":"jp","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)日本"},
+    {"tag":"us","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)美国"},
+    {"tag":"eu","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)英国|法国|德国|荷兰"},
+    {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)剩余|到期|香港|新加坡|日本|美国|英国|法国|德国|荷兰"},
     {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"jp"},
     {"tag":"direct","type":"selector","outbounds":["IPv4优先","IPv6优先","双栈"],"default":"IPv4优先"},
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"jp"},

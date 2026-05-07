@@ -17,22 +17,22 @@ config.outbounds.push(...proxies)
 
 config.outbounds.map(i => {
   if (['hk'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /香港|hong kong/i))
+    i.outbounds.push(...getTags(proxies, /香港/i))
   }
   if (['sg'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /新加坡|狮城|singapore/i))
+    i.outbounds.push(...getTags(proxies, /新加坡/i))
   }
   if (['jp'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /日本|japan/i))
+    i.outbounds.push(...getTags(proxies, /日本/i))
   }
   if (['us'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /美国|united states/i))
+    i.outbounds.push(...getTags(proxies, /美国/i))
   }
   if (['eu'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands/i))
+    i.outbounds.push(...getTags(proxies, /英国|法国|德国|荷兰/i))
   }
   if (['other'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /^(?!.*(?:回家|剩余|到期|时期|Traffic|Expire|香港|hong kong|新加坡|狮城|singapore|日本|japan|美国|united states|伦敦|英国|United Kingdom|法国|France|德国|Germany|荷兰|Netherlands)).*/i))
+    i.outbounds.push(...getTags(proxies, /^(?!.*(?:剩余|到期|香港|新加坡|日本|美国|英国|法国|德国|荷兰)).*/i))
   }
 })
 
