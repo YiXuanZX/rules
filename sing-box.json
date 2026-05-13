@@ -68,7 +68,7 @@
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"jp"},
     {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"sg"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
-    {"tag":"direct","type":"direct","server":"direct_dns"}
+    {"tag":"direct","type":"direct","domain_resolver":"direct_dns"}
   ],
   "inbounds": [
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"mtu":1500,"stack":"gvisor","auto_route":true,"auto_redirect":false},
