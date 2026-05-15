@@ -72,10 +72,13 @@ dns:
     #- https://dns.alidns.com/dns-query
     - https://mosdns.apad.pro/api-query#ecs=192.168.1.0/24
   nameserver-policy:
-    "rule-set:private,cn": [system]
+    "rule-set:private": [system]
+    "rule-set:cn": [dns.alidns.com]
+    "rule-set:gfw": [https://dns.google/dns-query#代理]
 
 hosts:
   dns.alidns.com: [223.5.5.5, 223.6.6.6]
+  dns.google: [8.8.8.8, 8.8.4.4]
   mosdns.apad.pro: 117.50.76.202
 
 proxy-groups:
