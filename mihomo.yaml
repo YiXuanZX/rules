@@ -73,7 +73,7 @@ dns:
     - https://mosdns.apad.pro/api-query#ecs=192.168.1.0/24
   nameserver-policy:
     "rule-set:private": [system]
-    "rule-set:cn": [dns.alidns.com]
+    "rule-set:china-list,cn": [dns.alidns.com]
     "rule-set:gfw": [https://dns.google/dns-query#代理]
 
 hosts:
@@ -162,6 +162,10 @@ rule-providers:
     <<: *domain
     path: ./rule_providers/gfw.mrs
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
+  china-list:
+    <<: *domain
+    path: ./rule_providers/china-list.mrs
+    url: "https://raw.githubusercontent.com/wwqgtxx/clash-rules/release/direct.mrs"
   cn:
     <<: *domain
     path: ./rule_providers/cn.mrs
