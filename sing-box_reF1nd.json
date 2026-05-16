@@ -26,6 +26,7 @@
       {"rule_set":"private","server":"local"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
       {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
+      {"rule_set":"china-list","server":"direct_dns"},
       {"rule_set":"gfw","server":"proxy_dns"}
     ],
     "final": "direct_dns",
@@ -57,6 +58,7 @@
       {"tag":"youtube","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs"},
       {"tag":"google","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs"},
       {"tag":"gfw","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/gfw.srs"},
+      {"tag":"china-list","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/direct.srs"},
       {"tag":"cn","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash-classical.srs"},
       {"tag":"cn_ip","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"}
     ],
