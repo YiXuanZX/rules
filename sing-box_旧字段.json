@@ -16,6 +16,7 @@
       {"rule_set":"private","server":"local"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
       {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
+      {"rule_set":"china-list","server":"direct_dns"},
       {"rule_set":"gfw","server":"proxy_dns"}
     ],
     "final": "direct_dns",
@@ -33,7 +34,7 @@
       {"rule_set":"ai","outbound":"ai"},
       {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
       {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
-      {"domain":["a.nel.cloudflare.com","challenges.cloudflare.com","static.cloudflareinsights.com"],"ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
+      {"domain":["a.nel.cloudflare.com","challenges.cloudflare.com","stun.cloudflare.com","static.cloudflareinsights.com"],"ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
       {"network":"tcp","action":"resolve"},
       {"rule_set":"cn_ip","outbound":"direct"}
     ],
@@ -47,6 +48,7 @@
       {"tag":"youtube","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs"},
       {"tag":"google","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs"},
       {"tag":"gfw","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/gfw.srs"},
+      {"tag":"china-list","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/direct.srs"},
       {"tag":"cn","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash-classical.srs"},
       {"tag":"cn_ip","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"}
     ],
