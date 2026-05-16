@@ -96,12 +96,13 @@ proxy-groups:
   - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 欧洲, 其他, 代理, 直连, AI, TG], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
 
 rules:
-  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT
-  - DOMAIN,abyss.cyapi.cn,REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT  #屏蔽Youtube quic流量
+  - DOMAIN,abyss.cyapi.cn,REJECT  #彩云天气去广告(以下三条)
   - DOMAIN,ad.cyapi.cn,REJECT
   - DOMAIN,gather.colorfulclouds.net,REJECT
-  - DOMAIN,a.nel.cloudflare.com,直连
+  - DOMAIN,a.nel.cloudflare.com,直连  #Cloudflare人机验证直连(以下四条)
   - DOMAIN,challenges.cloudflare.com,直连
+  - DOMAIN,stun.cloudflare.com,直连
   - DOMAIN,static.cloudflareinsights.com,直连
   - RULE-SET,private,直连
   - RULE-SET,private_ip,直连,no-resolve
