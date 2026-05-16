@@ -17,22 +17,22 @@ config.outbounds.push(...proxies)
 
 config.outbounds.map(i => {
   if (['hk'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /香港/i))
+    i.outbounds.push(...getTags(proxies, /香港|hk/i))
   }
   if (['sg'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /新加坡/i))
+    i.outbounds.push(...getTags(proxies, /新加坡|sg/i))
   }
   if (['jp'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /日本/i))
+    i.outbounds.push(...getTags(proxies, /日本|jp/i))
   }
   if (['us'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /美国/i))
+    i.outbounds.push(...getTags(proxies, /美国|us/i))
   }
   if (['eu'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /英国|法国|德国|荷兰/i))
+    i.outbounds.push(...getTags(proxies, /英国|法国|德国|荷兰|uk|fr|de|nl/i))
   }
   if (['other'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /^(?!.*(?:剩余|到期|香港|新加坡|日本|美国|英国|法国|德国|荷兰)).*/i))
+    i.outbounds.push(...getTags(proxies, /^(?!.*(?:剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us|英国|法国|德国|荷兰|uk|fr|de|nl)).*/i))
   }
 })
 

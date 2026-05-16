@@ -82,12 +82,12 @@ hosts:
   mosdns.apad.pro: 117.50.76.202
 
 proxy-groups:
-  - {name: 香港, <<: *select, filter: "(?i)香港", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png"}
-  - {name: 新加坡, <<: *select, filter: "(?i)新加坡", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png"}
-  - {name: 日本, <<: *select, filter: "(?i)日本", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png"}
-  - {name: 美国, <<: *select, filter: "(?i)美国", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png"}
-  - {name: 欧洲, <<: *select, filter: "(?i)英国|法国|德国|荷兰", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/European_Union.png"}
-  - {name: 其他, <<: *select, exclude-filter: "(?i)优先|双栈|剩余|到期|香港|新加坡|日本|美国|英国|法国|德国|荷兰", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_Nations.png"}
+  - {name: 香港, <<: *select, filter: "(?i)香港|hk", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png"}
+  - {name: 新加坡, <<: *select, filter: "(?i)新加坡|sg", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png"}
+  - {name: 日本, <<: *select, filter: "(?i)日本|jp", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png"}
+  - {name: 美国, <<: *select, filter: "(?i)美国|us", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png"}
+  - {name: 欧洲, <<: *select, filter: "(?i)英国|法国|德国|荷兰|uk|fr|de|nl", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/European_Union.png"}
+  - {name: 其他, <<: *select, exclude-filter: "(?i)优先|双栈|剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us|英国|法国|德国|荷兰|uk|fr|de|nl", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_Nations.png"}
 
   - {name: 代理, <<: *pr, proxies: [日本, 香港, 新加坡, 美国, 欧洲, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/World_Map.png"}
   - {name: 直连, type: select, proxies: [IPv4优先, IPv6优先, 双栈], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 600, lazy: false, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China_Map.png"}
