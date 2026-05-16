@@ -16,7 +16,7 @@
       {"rule_set":"private","server":"local"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
       {"rule_set":["ai","telegram","github","twitter","youtube","google","gfw"],"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
-      {"rule_set":"cn","server":"local"},
+      {"rule_set":{"china-list","cn"},"server":"direct_dns"},
       {"query_type":["A","AAAA"],"action":"evaluate","server":"direct_dns"},
       {"rule_set":"cn_ip","match_response":true,"action":"respond"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
@@ -49,6 +49,7 @@
       {"tag":"youtube","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs"},
       {"tag":"google","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs"},
       {"tag":"gfw","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/gfw.srs"},
+      {"tag":"china-list","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/direct.srs"},
       {"tag":"cn","type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash-classical.srs"},
       {"tag":"cn_ip","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"}
     ],
