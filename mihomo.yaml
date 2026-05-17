@@ -29,7 +29,7 @@ external-controller: "[::]:9090"
 external-ui: ui
 external-ui-url: "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip"
 
-unified-delay: true
+unified-delay: false
 tcp-concurrent: true
 find-process-mode: off
 

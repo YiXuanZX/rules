@@ -94,7 +94,7 @@
     {"tag":"proxy_download","detour":"proxy"}
   ],
   "experimental": {
-    "urltest_unified_delay": true,
+    "urltest_unified_delay": false,
     "cache_file": {"enabled":true,"store_fakeip":true,"store_dns":true},
     "clash_api": {
       "external_controller": "[::]:9090",
