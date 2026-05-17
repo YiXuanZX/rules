@@ -65,9 +65,9 @@
     {"tag":"us","type":"selector","outbounds":[]},
     {"tag":"eu","type":"selector","outbounds":[]},
     {"tag":"other","type":"selector","outbounds":[]},
-    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"jp"},
-    {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"jp"},
-    {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"sg"},
+    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
+    {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
+    {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
     {"tag":"direct","type":"direct","domain_resolver":"direct_dns"}
   ],
