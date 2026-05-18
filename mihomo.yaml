@@ -69,8 +69,7 @@ dns:
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
   nameserver:
-    #- https://dns.alidns.com/dns-query
-    - https://mosdns.apad.pro/api-query#ecs=192.168.1.0/24
+    - https://dns.alidns.com/dns-query
   nameserver-policy:
     "rule-set:private": [system]
     "rule-set:china-list,cn": [dns.alidns.com]
