@@ -14,6 +14,7 @@
       {"tag":"server_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
       {"tag":"direct_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
       {"tag":"proxy_dns","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
+      {"tag":"udp_dns","type":"udp","server":"dns.alidns.com","domain_resolver":"hosts"},
       {"tag":"local","type":"local"},
       {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/15"},
       {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"dns.google":["8.8.8.8","8.8.4.4"]}}
@@ -26,7 +27,7 @@
       {"rule_set":"private","server":"local"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
       {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
-      {"rule_set":"china-list","server":"direct_dns"},
+      {"rule_set":"china-list","server":"udp_dns"},
       {"rule_set":"gfw","server":"proxy_dns"}
     ],
     "final": "direct_dns",
@@ -79,9 +80,9 @@
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
     {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"us"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","eu","other"],"default":"hk"},
-    {"tag":"IPv4优先","type":"direct","domain_resolver":{"server":"direct_dns","strategy":"prefer_ipv4"}},
-    {"tag":"IPv6优先","type":"direct","domain_resolver":{"server":"direct_dns","strategy":"prefer_ipv6"}},
-    {"tag":"双栈","type":"direct","domain_resolver":"direct_dns"}
+    {"tag":"IPv4优先","type":"direct","domain_resolver":{"server":"udp_dns","strategy":"prefer_ipv4"}},
+    {"tag":"IPv6优先","type":"direct","domain_resolver":{"server":"udp_dns","strategy":"prefer_ipv6"}},
+    {"tag":"双栈","type":"direct","domain_resolver":"udp_dns"}
   ],
   "inbounds": [
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"mtu":1500,"stack":"gvisor","auto_route":true,"auto_redirect":false},
