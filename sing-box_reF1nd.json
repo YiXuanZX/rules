@@ -23,9 +23,9 @@
       {"clash_mode":"Global","query_type":"AAAA","action":"predefined"},
       {"clash_mode":"Global","server":"proxy_dns"},
       {"clash_mode":"Direct","server":"direct_dns"},
-      {"domain":"lancache.steamcontent.com","domain_suffix":"market.xiaomi.com","server":"direct_dns"},
       {"rule_set":"private","server":"local"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
+      {"domain":"lancache.steamcontent.com","domain_suffix":"market.xiaomi.com","server":"direct_dns"},
       {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
       {"rule_set":"china-list","server":"udp_dns"},
       {"rule_set":"gfw","server":"proxy_dns"}
