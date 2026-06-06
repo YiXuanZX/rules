@@ -1,5 +1,5 @@
 pr: &pr {type: select, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false}
-select: &select {type: select, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false, include-all: true, empty-fallback: DIRECT}
+select: &select {type: select, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false, include-all: true, empty-fallback: REJECT}
 p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.5.0"]}, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false}}
 
 proxy-providers:
