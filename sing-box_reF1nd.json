@@ -45,7 +45,7 @@
       {"rule_set":"ai","outbound":"ai"},
       {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
       {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
-      {"domain":["a.nel.cloudflare.com","challenges.cloudflare.com","stun.cloudflare.com","static.cloudflareinsights.com"],"ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
+      {"ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
       {"network":"tcp","action":"resolve","match_only":true},
       {"rule_set":"cn_ip","outbound":"direct"}
     ],
@@ -74,7 +74,7 @@
     {"tag":"jp","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)日本|jp"},
     {"tag":"us","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)美国|us"},
     {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us"},
-    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"us"},
+    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"us"},
     {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},

@@ -86,7 +86,7 @@ proxy-groups:
   - {name: 美国, <<: *select, filter: "(?i)美国|us", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png"}
   - {name: 其他, <<: *select, exclude-filter: "(?i)优先|双栈|剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Server.png"}
 
-  - {name: 代理, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png"}
+  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png"}
   - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png"}
   - {name: TG, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram_X.png"}
   - {name: 直连, type: select, proxies: [IPv4优先, IPv6优先, 双栈], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 300, lazy: false, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Direct.png"}
@@ -97,10 +97,6 @@ rules:
   - DOMAIN,abyss.cyapi.cn,REJECT  #彩云天气去广告(以下三条)
   - DOMAIN,ad.cyapi.cn,REJECT
   - DOMAIN,gather.colorfulclouds.net,REJECT
-  - DOMAIN,a.nel.cloudflare.com,直连  #Cloudflare人机验证直连(以下四条)
-  - DOMAIN,challenges.cloudflare.com,直连
-  - DOMAIN,stun.cloudflare.com,直连
-  - DOMAIN,static.cloudflareinsights.com,直连
   - RULE-SET,private,直连
   - RULE-SET,private_ip,直连,no-resolve
   - RULE-SET,ai,AI
