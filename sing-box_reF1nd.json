@@ -92,6 +92,9 @@
     {"tag":"direct_download","detour":"direct"},
     {"tag":"proxy_download","detour":"proxy"}
   ],
+  "services": [
+    {"type":"api","listen":"::","listen_port":9091}
+  ],
   "experimental": {
     "cache_file": {"enabled":true,"store_fakeip":true,"store_dns":true},
     "clash_api": {
