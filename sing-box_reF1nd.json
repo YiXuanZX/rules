@@ -78,10 +78,7 @@
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"us"},
     {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
-    {"tag":"双栈","type":"direct","domain_resolver":"udp_dns"},
-    {"tag":"direct","type":"selector","outbounds":["IPv4优先","IPv6优先","双栈"],"default":"IPv4优先"},
-    {"tag":"IPv4优先","type":"direct","domain_resolver":{"server":"udp_dns","strategy":"prefer_ipv4"}},
-    {"tag":"IPv6优先","type":"direct","domain_resolver":{"server":"udp_dns","strategy":"prefer_ipv6"}}
+    {"tag":"direct","type":"direct","domain_resolver":"udp_dns"}
   ],
   "inbounds": [
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"mtu":9000,"stack":"mixed","auto_route":true,"auto_redirect":false},

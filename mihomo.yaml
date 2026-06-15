@@ -8,16 +8,6 @@ proxy-providers:
     url: "此处填入订阅"
     path: ./proxy_providers/provider1.yaml
 
-proxies:
-  - name: IPv4优先
-    type: direct
-    ip-version: ipv4-prefer
-  - name: IPv6优先
-    type: direct
-    ip-version: ipv6-prefer
-  - name: 双栈
-    type: direct
-
 mixed-port: 7890
 redir-port: 7891
 tproxy-port: 7892
@@ -84,21 +74,20 @@ proxy-groups:
   - {name: 新加坡, <<: *select, filter: "(?i)新加坡|sg", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png"}
   - {name: 日本, <<: *select, filter: "(?i)日本|jp", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png"}
   - {name: 美国, <<: *select, filter: "(?i)美国|us", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png"}
-  - {name: 其他, <<: *select, exclude-filter: "(?i)优先|双栈|剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Server.png"}
+  - {name: 其他, <<: *select, exclude-filter: "(?i)剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Server.png"}
 
   - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png"}
   - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png"}
   - {name: TG, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram_X.png"}
-  - {name: 直连, type: select, proxies: [IPv4优先, IPv6优先, 双栈], url: https://connectivitycheck.platform.hicloud.com/generate_204, interval: 300, lazy: false, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Direct.png"}
-  - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他, 代理, AI, TG, 直连], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
+  - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他, 代理, AI, TG], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
 
 rules:
   - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT  #屏蔽Youtube quic流量
   - DOMAIN,abyss.cyapi.cn,REJECT  #彩云天气去广告(以下三条)
   - DOMAIN,ad.cyapi.cn,REJECT
   - DOMAIN,gather.colorfulclouds.net,REJECT
-  - RULE-SET,private,直连
-  - RULE-SET,private_ip,直连,no-resolve
+  - RULE-SET,private,DIRECT
+  - RULE-SET,private_ip,DIRECT,no-resolve
   - RULE-SET,ai,AI
   - RULE-SET,telegram,TG
   - RULE-SET,telegram_ip,TG,no-resolve
@@ -107,8 +96,8 @@ rules:
   - RULE-SET,youtube,代理
   - RULE-SET,google,代理
   - RULE-SET,gfw,代理
-  - RULE-SET,cn,直连
-  - RULE-SET,cn_ip,直连
+  - RULE-SET,cn,DIRECT
+  - RULE-SET,cn_ip,DIRECT
   - MATCH,代理
 
 rule-anchor:
