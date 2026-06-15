@@ -4,7 +4,6 @@
       "tag": "1",
       "type": "remote",
       "url": "此处填入订阅",
-      "path": "1.json",
       "http_client": "direct_download",
       "health_check": {"enabled":true}
     }
