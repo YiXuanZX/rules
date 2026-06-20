@@ -1,6 +1,6 @@
-pr: &pr {type: select, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false}
-select: &select {type: select, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false, include-all: true}
-p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.5.0"]}, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: false}}
+pr: &pr {type: select, proxies: [香港, 新加坡, 日本, 美国, 其他]}
+p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.5.0"]}, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300, lazy: false}}
+check: &check {url: "https://www.gstatic.com/generate_204", interval: 300, lazy: false}
 
 proxy-providers:
   provider1:
@@ -69,16 +69,16 @@ hosts:
   dns.google: [8.8.8.8, 8.8.4.4]
 
 proxy-groups:
-  - {name: 香港, <<: *select, filter: "(?i)香港|hk", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png"}
-  - {name: 新加坡, <<: *select, filter: "(?i)新加坡|sg", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png"}
-  - {name: 日本, <<: *select, filter: "(?i)日本|jp", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png"}
-  - {name: 美国, <<: *select, filter: "(?i)美国|us", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png"}
-  - {name: 其他, <<: *select, exclude-filter: "(?i)剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us", icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Server.png"}
+  - {name: 香港, type: select, include-all: true, filter: "(?i)香港|hk", <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png"}
+  - {name: 新加坡, type: select, include-all: true, filter: "(?i)新加坡|sg", <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png"}
+  - {name: 日本, type: select, include-all: true, filter: "(?i)日本|jp", <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png"}
+  - {name: 美国, type: select, include-all: true, filter: "(?i)美国|us", <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png"}
+  - {name: 其他, type: select, include-all: true, exclude-filter: "(?i)剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us", <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Server.png"}
 
-  - {name: 代理, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png"}
-  - {name: AI, <<: *pr, proxies: [美国, 日本, 香港, 新加坡, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png"}
-  - {name: TG, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram_X.png"}
-  - {name: GLOBAL, <<: *pr, proxies: [香港, 新加坡, 日本, 美国, 其他, 代理, AI, TG], icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
+  - {name: 代理, <<: *pr, default-selected: 香港, <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png"}
+  - {name: AI, <<: *pr, default-selected: 美国, <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png"}
+  - {name: TG, <<: *pr, default-selected: 香港, <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram_X.png"}
+  - {name: GLOBAL, <<: *pr, default-selected: 香港, <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
 
 rules:
   - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT  #屏蔽Youtube quic流量
