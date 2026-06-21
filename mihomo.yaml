@@ -78,7 +78,6 @@ proxy-groups:
   - {name: 代理, <<: [*pr, *check], default-selected: 香港, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png"}
   - {name: AI, <<: [*pr, *check], default-selected: 美国, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png"}
   - {name: TG, <<: [*pr, *check], default-selected: 香港, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram_X.png"}
-  - {name: GLOBAL, <<: [*pr, *check], default-selected: 香港, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png"}
 
 rules:
   - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT  #屏蔽Youtube quic流量
