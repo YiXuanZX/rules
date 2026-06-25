@@ -9,13 +9,10 @@ proxy-providers:
     path: ./proxy_providers/provider1.yaml
 
 mixed-port: 7890
-redir-port: 7891
-tproxy-port: 7892
 log-level: error
 ipv6: true
-allow-lan: true
 
-external-controller: "[::]:9090"
+external-controller: "127.0.0.1:9090"
 external-ui: ui
 external-ui-url: "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip"
 
@@ -34,19 +31,16 @@ tun:
   enable: true
   stack: system # 如有问题可使用gvisor
   mtu: 1500
-  device: nikki
   dns-hijack:
     - "udp://any:53"
     - "tcp://any:53"
   auto-route: true
-  auto-redirect: true
   auto-detect-interface: true
   disable-icmp-forwarding: true
 
 dns:
   enable: true
   ipv6: true
-  listen: "[::]:1053"
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
