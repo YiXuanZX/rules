@@ -25,7 +25,7 @@ profile:
 
 tun:
   enable: true
-  stack: system # 如有问题可使用gvisor
+  stack: system  # 如有问题可使用gvisor
   mtu: 1500
   dns-hijack:
     - "udp://any:53"
@@ -50,13 +50,13 @@ dns:
   nameserver:
     - https://dns.alidns.com/dns-query
   nameserver-policy:
-    "rule-set:private": [system]
-    "rule-set:china-list,cn": [dns.alidns.com]
-    "rule-set:gfw": [https://dns.google/dns-query#代理]
+    "rule-set:private": ["system"]
+    "rule-set:china-list,cn": ["dns.alidns.com"]
+    "rule-set:gfw": ["https://dns.google/dns-query#代理"]
 
 hosts:
-  dns.alidns.com: [223.5.5.5, 223.6.6.6]
-  dns.google: [8.8.8.8, 8.8.4.4]
+  "dns.alidns.com": ["223.5.5.5", "223.6.6.6"]
+  "dns.google": ["8.8.8.8", "8.8.4.4"]
 
 proxy-groups:
   - {name: 香港, type: select, include-all: true, filter: "(?i)香港|hk", <<: *check, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png"}
@@ -70,8 +70,8 @@ proxy-groups:
   - {name: TG, <<: [*pr, *check], default-selected: 香港, icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram_X.png"}
 
 rules:
-  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT  #屏蔽Youtube quic流量
-  - DOMAIN,abyss.cyapi.cn,REJECT  #彩云天气去广告(以下三条)
+  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,youtube)),REJECT  # 屏蔽YouTube QUIC流量
+  - DOMAIN,abyss.cyapi.cn,REJECT  # 彩云天气去广告(以下三条)
   - DOMAIN,ad.cyapi.cn,REJECT
   - DOMAIN,gather.colorfulclouds.net,REJECT
   - RULE-SET,private,DIRECT
