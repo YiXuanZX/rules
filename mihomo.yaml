@@ -32,8 +32,8 @@ profile:
 
 tun:
   enable: true
-  stack: mixed
-  mtu: 9000
+  stack: system # 如有问题可使用gvisor
+  mtu: 1500
   device: nikki
   dns-hijack:
     - "udp://any:53"
