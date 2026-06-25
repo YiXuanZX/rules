@@ -23,7 +23,7 @@ unified-delay: false
 tcp-concurrent: true
 find-process-mode: off
 
-keep-alive-idle: 600
+keep-alive-idle: 300
 keep-alive-interval: 15
 
 profile:
