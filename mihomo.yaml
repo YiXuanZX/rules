@@ -135,7 +135,7 @@ rule-providers:
   gfw:
     <<: *domain
     path: ./rule_providers/gfw.mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
+    url: "https://raw.githubusercontent.com/wwqgtxx/clash-rules/release/gfw.mrs"
   china-list:
     <<: *domain
     path: ./rule_providers/china-list.mrs
