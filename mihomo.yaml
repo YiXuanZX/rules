@@ -11,6 +11,7 @@ proxy-providers:
 mixed-port: 7890
 log-level: error
 ipv6: true
+allow-lan: false
 
 external-controller: "127.0.0.1:9090"
 external-ui: ui
