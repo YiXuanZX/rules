@@ -51,6 +51,7 @@ dns:
   nameserver:
     - quic://dns.alidns.com
   nameserver-policy:
+    "www.gstatic.com": ["system", "119.29.29.29"]
     "rule-set:private": ["system"]
     "rule-set:gfw": ["https://dns.google/dns-query#代理"]
     "rule-set:china-list,cn": ["quic://dns.alidns.com"]
