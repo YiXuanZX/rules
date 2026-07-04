@@ -52,8 +52,8 @@ dns:
     - quic://dns.alidns.com
   nameserver-policy:
     "rule-set:private": ["system"]
-    "rule-set:china-list,cn": ["quic://dns.alidns.com"]
     "rule-set:gfw": ["https://dns.google/dns-query#代理"]
+    "rule-set:china-list,cn": ["quic://dns.alidns.com"]
 
 hosts:
   "dns.alidns.com": ["223.5.5.5", "223.6.6.6"]
