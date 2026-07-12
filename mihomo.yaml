@@ -103,13 +103,9 @@ rule-providers:
     path: ./rule_providers/private_ip.mrs
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
   ai:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: yaml
-    proxy: 代理
-    path: ./rule_providers/ai.yaml
-    url: https://kelee.one/Tool/Clash/Rule/AI.yaml
+    <<: *domain
+    path: ./rule_providers/ai.mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
   telegram:
     <<: *domain
     path: ./rule_providers/telegram.mrs
