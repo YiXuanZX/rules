@@ -15,6 +15,7 @@
       {"tag":"proxy_dns","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
       {"tag":"udp_dns","type":"udp","server":"dns.alidns.com","domain_resolver":"hosts"},
       {"tag":"local","type":"local"},
+      {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"198.18.0.0/15"},
       {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"dns.google":["8.8.8.8","8.8.4.4"]}}
     ],
     "rules": [
@@ -78,7 +79,7 @@
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"us"},
     {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
     {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
-    {"tag":"direct","type":"direct","domain_resolver":"direct_dns"}
+    {"tag":"direct","type":"direct","domain_resolver":"udp_dns"}
   ],
   "inbounds": [
     {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"mtu":9000,"stack":"mixed","auto_route":true,"auto_redirect":false},
