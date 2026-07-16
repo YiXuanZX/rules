@@ -35,8 +35,8 @@
   },
   "route": {
     "rules": [
+      {"network":["icmp","udp"],"action":"resolve"},
       {"network":"icmp","outbound":"direct"},
-      {"network":"udp","action":"resolve"},
       {"clash_mode":"Global","outbound":"proxy"},
       {"clash_mode":"Direct","outbound":"direct"},
       {"network":"udp","port":443,"rule_set":"youtube","action":"reject"},
