@@ -49,12 +49,12 @@ dns:
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
   nameserver:
-    - quic://dns.alidns.com
+    - 223.5.5.5
   nameserver-policy:
     "www.gstatic.com": ["system", "119.29.29.29"]
     "rule-set:private": ["system"]
     "rule-set:gfw": ["https://dns.google/dns-query#代理"]
-    "rule-set:china-list,cn": ["quic://dns.alidns.com"]
+    "rule-set:china-list,cn": ["223.5.5.5"]
 
 hosts:
   "dns.alidns.com": ["223.5.5.5", "223.6.6.6"]
