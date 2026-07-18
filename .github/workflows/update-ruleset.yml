@@ -1,0 +1,40 @@
+name: Update Rule Lists
+
+on:
+  schedule:
+    # 每天 UTC 23 点运行一次（北京时间 7 点），可自行调整
+    - cron: '0 23 * * *'
+  workflow_dispatch: {}   # 允许手动在 Actions 页面点击运行
+
+permissions:
+  contents: write
+
+jobs:
+  update-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v6
+
+      - name: 下载并重命名规则文件
+        run: |
+          set -e
+          mkdir -p ruleset
+          curl -fsSL -o ruleset/ai.txt \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.list"
+          curl -fsSL -o ruleset/china-list.txt \
+            "https://static-file-global.353355.xyz/rules/cn-additional-list-clash-classical.yaml"
+          curl -fsSL -o ruleset/cn.txt \
+            "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/direct.txt"
+
+      - name: 提交并推送变更
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ruleset/ai.txt ruleset/china-list.txt ruleset/cn.txt
+          if git diff --cached --quiet; then
+            echo "没有变化，跳过提交"
+          else
+            git commit -m "chore: 自动更新规则文件 $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
