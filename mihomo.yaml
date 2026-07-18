@@ -45,7 +45,7 @@ dns:
     - "lancache.steamcontent.com"
     - "rule-set:private"
   default-nameserver:
-    - https://223.6.6.6/dns-query
+    - 223.5.5.5
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
   nameserver:
