@@ -26,12 +26,16 @@ jobs:
             "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/direct.txt"
           curl -fsSL -o ruleset/cn.txt \
             "https://static-file-global.353355.xyz/rules/cn-additional-list-clash-classical.yaml"
+          curl -fsSL -o ruleset/cn_ip.txt \
+            "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/surge/cn.txt"
+          curl -fsSL -o ruleset/telegram_ip.txt \
+            "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/surge/telegram.txt"
 
       - name: 提交并推送变更
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ruleset/ai.txt ruleset/china-list.txt ruleset/cn.txt
+          git add ruleset/ai.txt ruleset/china-list.txt ruleset/cn.txt ruleset/cn_ip.txt ruleset/telegram_ip.txt
           if git diff --cached --quiet; then
             echo "没有变化，跳过提交"
           else
