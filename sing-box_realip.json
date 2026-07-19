@@ -52,9 +52,7 @@
     ],
     "rule_set": [
       {"tag":["private","telegram","github","twitter","youtube","google"],"type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/{tag}.srs"},
-      {"tag":["ai","gfw","china-list","cn"],"type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/{tag}.srs"},
-      {"tag":"telegram_ip","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs"},
-      {"tag":"cn_ip","type":"remote","url":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"}
+      {"tag":["ai","gfw","china-list","cn","cn_ip","telegram_ip"],"type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/{tag}.srs"}
     ],
     "final": "proxy",
     "auto_detect_interface": true,
