@@ -1,5 +1,5 @@
 pr: &pr {type: select, proxies: [香港, 新加坡, 日本, 美国, 其他]}
-p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.5.0"]}, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300, lazy: false}}
+p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.5.2"]}, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300, lazy: false}}
 check: &check {url: "https://www.gstatic.com/generate_204", interval: 300, lazy: false}
 
 proxy-providers:
@@ -41,6 +41,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
+    - "*"
     - "+.market.xiaomi.com"
     - "lancache.steamcontent.com"
     - "rule-set:private"
@@ -52,6 +53,7 @@ dns:
     - 223.5.5.5
   nameserver-policy:
     "www.gstatic.com": ["system", "119.29.29.29"]
+    "*": ["system"]
     "rule-set:private": ["system"]
     "rule-set:gfw": ["https://dns.google/dns-query#代理"]
     "rule-set:china-list,cn": ["223.5.5.5"]

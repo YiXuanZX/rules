@@ -22,7 +22,7 @@
       {"clash_mode":"Global","query_type":"AAAA","action":"predefined"},
       {"clash_mode":"Global","server":"proxy_dns"},
       {"clash_mode":"Direct","server":"direct_dns"},
-      {"rule_set":"private","server":"local"},
+      {"domain":".","rule_set":"private","server":"local"},
       {"query_type":["SVCB","HTTPS"],"action":"reject"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
       {"rule_set":["ai","telegram","github","twitter","youtube","google","gfw"],"query_type":"AAAA","action":"predefined"},
