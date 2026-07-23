@@ -27,7 +27,7 @@ jobs:
           curl -fsSL -o ruleset/cn.txt \
             "https://static-file-global.353355.xyz/rules/cn-additional-list-clash-classical.yaml"
           curl -fsSL -o ruleset/cn_ip.txt \
-            "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/surge/cn.txt"
+            "https://raw.githubusercontent.com/nekolsd/geoip/release/surge/cn.txt"
           curl -fsSL -o ruleset/telegram_ip.txt \
             "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/surge/telegram.txt"
 
