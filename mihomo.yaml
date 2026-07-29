@@ -1,6 +1,6 @@
 pr: &pr {type: select, proxies: [香港, 新加坡, 日本, 美国, 其他]}
-p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.5.2"]}, health-check: {enable: true, url: "https://www.apple.com/library/test/success.html", interval: 300, lazy: false}}
-check: &check {url: "https://www.apple.com/library/test/success.html", interval: 300, lazy: false}
+p: &p {type: http, interval: 86400, proxy: DIRECT, header: {User-Agent: ["clash-verge/v2.5.2"]}, health-check: {enable: true, url: "https://www.apple.com/library/test/success.html", interval: 600, lazy: false}}
+check: &check {url: "https://www.apple.com/library/test/success.html", interval: 600, lazy: false}
 
 proxy-providers:
   provider1:
