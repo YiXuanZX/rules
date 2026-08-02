@@ -5,7 +5,7 @@
       "type": "remote",
       "url": "此处填入订阅",
       "http_client": "direct_download",
-      "health_check": {"enabled":true}
+      "health_check": {"enabled":true,"url":"https://www.apple.com/library/test/success.html"}
     }
   ],
   "dns": {
