@@ -41,16 +41,17 @@
       {"clash_mode":"Direct","outbound":"direct"},
       {"network":"udp","port":443,"rule_set":"youtube","action":"reject"},
       {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
-      {"rule_set":"ai","outbound":"ai"},
-      {"rule_set":["telegram","telegram_ip"],"outbound":"tg"},
+      {"rule_set":"category-ai-!cn","outbound":"ai"},
+      {"rule_set":["telegram","ip-telegram"],"outbound":"tg"},
       {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
       {"ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
       {"network":"tcp","action":"resolve","match_only":true},
-      {"rule_set":"cn_ip","outbound":"direct"}
+      {"rule_set":"ip-cn","outbound":"direct"}
     ],
     "rule_set": [
-      {"tag":["private","telegram","github","twitter","youtube","google"],"type":"remote","url":"https://raw.githubusercontent.com/1715173329/sing-geosite/rule-set/geosite-{tag}.srs"},
-      {"tag":["ai","gfw","china-list","cn","cn_ip","telegram_ip"],"type":"remote","url":"https://raw.githubusercontent.com/1715173329/sing-geoip/rule-set/geo{tag}.srs"}
+      {"tag":["private","category-ai-!cn","telegram","github","twitter","youtube","google","gfw","china-list"],"type":"remote","url":"https://raw.githubusercontent.com/1715173329/sing-geosite/rule-set/geosite-{tag}.srs"},
+      {"tag":["ip-telegram","ip-cn"],"type":"remote","url":"https://raw.githubusercontent.com/1715173329/sing-geoip/rule-set/geo{tag}.srs"},
+      {"tag":["cn"],"type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash.srs"}
     ],
     "final": "proxy",
     "auto_detect_interface": true,
