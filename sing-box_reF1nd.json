@@ -30,8 +30,7 @@
       {"rule_set":"china-list","server":"udp_dns"}
     ],
     "final": "direct_dns",
-    "cache_capacity": 4096,
-    "optimistic": true
+    "cache_capacity": 4096
   },
   "route": {
     "rules": [

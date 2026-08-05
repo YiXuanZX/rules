@@ -35,8 +35,7 @@
       {"server":"proxy_dns"}
     ],
     "final": "direct_dns",
-    "cache_capacity": 4096,
-    "optimistic": true
+    "cache_capacity": 4096
   },
   "route": {
     "rules": [
