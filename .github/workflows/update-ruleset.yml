@@ -24,6 +24,8 @@ jobs:
             "https://raw.githubusercontent.com/1715173329/sing-geosite/rule-set/geosite-category-ai-!cn.srs"
           curl -fsSL -o ruleset/cn.txt \
             "https://static-file-global.353355.xyz/rules/cn-additional-list-clash-classical.yaml"
+          curl -fsSL -o ruleset/cn.srs \
+            "https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash.srs"
           curl -fsSL -o ruleset/cn_ip.srs \
             "https://raw.githubusercontent.com/1715173329/sing-geoip/rule-set/geoip-cn.srs"
           curl -fsSL -o ruleset/telegram_ip.srs \
@@ -33,7 +35,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ruleset/ai.srs ruleset/cn.txt ruleset/cn_ip.srs ruleset/telegram_ip.srs
+          git add ruleset/ai.srs ruleset/cn.txt ruleset/cn.srs ruleset/cn_ip.srs ruleset/telegram_ip.srs
           if git diff --cached --quiet; then
             echo "没有变化，跳过提交"
           else
