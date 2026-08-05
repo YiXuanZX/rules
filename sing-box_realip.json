@@ -35,13 +35,13 @@
       {"server":"proxy_dns"}
     ],
     "final": "direct_dns",
-    "cache_capacity": 8192,
+    "cache_capacity": 4096,
     "optimistic": true
   },
   "route": {
     "rules": [
       {"network":"icmp","outbound":"direct"},
-      {"domain":"Mijia Cloud","domain_suffix":"push.apple.com","rule_set":"telegram_ip","invert":true,"action":"sniff"},
+      {"domain":"Mijia Cloud","domain_suffix":"push.apple.com","rule_set":"telegram_ip","invert":true,"action":"sniff","sniffer":["http","tls"]},
       {"clash_mode":"Global","outbound":"proxy"},
       {"clash_mode":"Direct","outbound":"direct"},
       {"network":"udp","port":443,"rule_set":"youtube","action":"reject"},
