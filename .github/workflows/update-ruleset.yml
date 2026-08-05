@@ -20,22 +20,20 @@ jobs:
         run: |
           set -e
           mkdir -p ruleset
-          curl -fsSL -o ruleset/ai.txt \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.list"
-          curl -fsSL -o ruleset/china-list.txt \
-            "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/direct.txt"
+          curl -fsSL -o ruleset/ai.srs \
+            "https://raw.githubusercontent.com/1715173329/sing-geosite/rule-set/geosite-category-ai-!cn.srs"
           curl -fsSL -o ruleset/cn.txt \
             "https://static-file-global.353355.xyz/rules/cn-additional-list-clash-classical.yaml"
-          curl -fsSL -o ruleset/cn_ip.txt \
-            "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/surge/cn.txt"
-          curl -fsSL -o ruleset/telegram_ip.txt \
-            "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/surge/telegram.txt"
+          curl -fsSL -o ruleset/cn_ip.srs \
+            "https://raw.githubusercontent.com/1715173329/sing-geoip/rule-set/geoip-cn.srs"
+          curl -fsSL -o ruleset/telegram_ip.srs \
+            "https://raw.githubusercontent.com/1715173329/sing-geoip/rule-set/geoip-telegram.srs"
 
       - name: 提交并推送变更
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ruleset/ai.txt ruleset/china-list.txt ruleset/cn.txt ruleset/cn_ip.txt ruleset/telegram_ip.txt
+          git add ruleset/ai.srs ruleset/cn.txt ruleset/cn_ip.srs ruleset/telegram_ip.srs
           if git diff --cached --quiet; then
             echo "没有变化，跳过提交"
           else
