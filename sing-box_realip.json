@@ -35,6 +35,7 @@
       {"server":"proxy_dns"}
     ],
     "final": "direct_dns",
+    "timeout": "2s",
     "cache_capacity": 4096
   },
   "route": {

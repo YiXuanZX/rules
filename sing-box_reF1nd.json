@@ -30,6 +30,7 @@
       {"rule_set":"china-list","server":"udp_dns"}
     ],
     "final": "direct_dns",
+    "timeout": "2s",
     "cache_capacity": 4096
   },
   "route": {
