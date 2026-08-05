@@ -54,7 +54,7 @@
     ],
     "final": "proxy",
     "auto_detect_interface": true,
-    "default_domain_resolver": {"server":"server_dns","disable_optimistic_cache":true}
+    "default_domain_resolver": "server_dns"
   },
   "outbounds": [
     {"tag":"hk","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)香港|hk"},
