@@ -75,8 +75,8 @@
   ],
   "log": {"level":"warn","output":"sing-box.log","timestamp":true},
   "http_clients": [
-    {"tag":"direct_download","detour":"direct"},
-    {"tag":"proxy_download","detour":"proxy"}
+    {"tag":"proxy_download","detour":"proxy"},
+    {"tag":"direct_download","detour":"direct"}
   ],
   "services": [
     {"type":"api","listen":"127.0.0.1","listen_port":9091,"dashboard":"dashboard"}
