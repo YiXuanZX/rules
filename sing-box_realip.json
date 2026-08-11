@@ -60,11 +60,11 @@
     "default_domain_resolver": "server_dns"
   },
   "outbounds": [
-    {"tag":"hk","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)香港|hk"},
-    {"tag":"sg","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)新加坡|sg"},
-    {"tag":"jp","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)日本|jp"},
-    {"tag":"us","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)美国|us"},
-    {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us"},
+    {"tag":"hk","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)香港|hk|hongkong|hong kong"},
+    {"tag":"sg","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)新加坡|sg|singapore"},
+    {"tag":"jp","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)日本|jp|japan"},
+    {"tag":"us","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)美国|us|unitedstates|united states"},
+    {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)剩余|到期|香港|hk|hongkong|hong kong|新加坡|sg|singapore|日本|jp|japan|美国|us|unitedstates|united states"},
     {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
     {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"us"},
     {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},

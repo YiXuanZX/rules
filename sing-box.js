@@ -17,19 +17,19 @@ config.outbounds.push(...proxies)
 
 config.outbounds.map(i => {
   if (['hk'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /香港|hk/i))
+    i.outbounds.push(...getTags(proxies, /香港|hk|hongkong|hong kong/i))
   }
   if (['sg'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /新加坡|sg/i))
+    i.outbounds.push(...getTags(proxies, /新加坡|sg|singapore/i))
   }
   if (['jp'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /日本|jp/i))
+    i.outbounds.push(...getTags(proxies, /日本|jp|japan/i))
   }
   if (['us'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /美国|us/i))
+    i.outbounds.push(...getTags(proxies, /美国|us|unitedstates|united states/i))
   }
   if (['other'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /^(?!.*(?:剩余|到期|香港|hk|新加坡|sg|日本|jp|美国|us)).*/i))
+    i.outbounds.push(...getTags(proxies, /^(?!.*(?:剩余|到期|香港|hk|hongkong|hong kong|新加坡|sg|singapore|日本|jp|japan|美国|us|unitedstates|united states)).*/i))
   }
 })
 
