@@ -81,7 +81,7 @@
     {"tag":"direct_download","detour":"direct"}
   ],
   "services": [
-    {"type":"api","listen":"127.0.0.1","listen_port":9091,"dashboard":"dashboard"}
+    {"type":"api","listen":"127.0.0.1","listen_port":9090,"dashboard":"dashboard"}
   ],
   "experimental": {
     "cache_file": {"enabled":true,"store_fakeip":true,"store_dns":true}
