@@ -1,0 +1,87 @@
+{
+  "providers": [
+    {
+      "tag": "1",
+      "type": "remote",
+      "url": "此处填入订阅",
+      "http_client": "direct_download",
+      "health_check": {"enabled":true,"url":"https://www.apple.com/library/test/success.html"}
+    }
+  ],
+  "dns": {
+    "servers": [
+      {"tag":"server_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
+      {"tag":"direct_dns","type":"https","server":"dns.alidns.com","domain_resolver":"hosts"},
+      {"tag":"proxy_dns","type":"https","server":"dns.google","domain_resolver":"hosts","detour":"proxy"},
+      {"tag":"udp_dns","type":"udp","server":"dns.alidns.com","domain_resolver":"hosts"},
+      {"tag":"local","type":"local"},
+      {"tag":"fake-ip-dns-server","type":"fakeip","inet4_range":"28.0.0.0/8"},
+      {"tag":"hosts","type":"hosts","predefined":{"dns.alidns.com":["223.5.5.5","223.6.6.6"],"dns.google":["8.8.8.8","8.8.4.4"]}}
+    ],
+    "rules": [
+      {"clash_mode":"Global","query_type":"AAAA","action":"predefined"},
+      {"clash_mode":"Global","server":"proxy_dns"},
+      {"clash_mode":"Direct","server":"direct_dns"},
+      {"domain":".","rule_set":"private","server":"local"},
+      {"query_type":["SVCB","HTTPS"],"action":"reject"},
+      {"domain":"lancache.steamcontent.com","domain_suffix":"market.xiaomi.com","server":"direct_dns"},
+      {"query_type":["A","AAAA"],"server":"fake-ip-dns-server","rewrite_ttl":1},
+      {"rule_set":"gfw","server":"proxy_dns"},
+      {"rule_set":"china-list","server":"udp_dns"}
+    ],
+    "final": "direct_dns",
+    "timeout": "2s",
+    "cache_capacity": 4096
+  },
+  "route": {
+    "rules": [
+      {"network":["icmp","udp"],"action":"resolve"},
+      {"network":"icmp","outbound":"direct"},
+      {"clash_mode":"Global","outbound":"proxy"},
+      {"clash_mode":"Direct","outbound":"direct"},
+      {"network":"udp","port":443,"rule_set":"youtube","action":"reject"},
+      {"domain":["abyss.cyapi.cn","ad.cyapi.cn","gather.colorfulclouds.net"],"action":"reject"},
+      {"rule_set":"category-ai-!cn","outbound":"ai"},
+      {"rule_set":["telegram","ip-telegram"],"outbound":"tg"},
+      {"rule_set":["github","twitter","youtube","google","gfw"],"outbound":"proxy"},
+      {"ip_is_private":true,"rule_set":["private","cn"],"outbound":"direct"},
+      {"network":"tcp","action":"resolve","match_only":true},
+      {"rule_set":"ip-cn","outbound":"direct"}
+    ],
+    "rule_set": [
+      {"tag":["private","category-ai-!cn","telegram","github","twitter","youtube","google","gfw","china-list"],"type":"remote","url":"https://raw.githubusercontent.com/1715173329/sing-geosite/rule-set/geosite-{tag}.srs"},
+      {"tag":["ip-telegram","ip-cn"],"type":"remote","url":"https://raw.githubusercontent.com/1715173329/sing-geoip/rule-set/geo{tag}.srs"},
+      {"tag":["cn"],"type":"remote","url":"https://raw.githubusercontent.com/YiXuanZX/sing-box-geosite/main/rule/cn-additional-list-clash.srs"}
+    ],
+    "final": "proxy",
+    "auto_detect_interface": true,
+    "default_domain_resolver": "server_dns"
+  },
+  "outbounds": [
+    {"tag":"hk","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)香港|hk|hongkong|hong kong"},
+    {"tag":"sg","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)新加坡|sg|singapore"},
+    {"tag":"jp","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)日本|jp|japan"},
+    {"tag":"us","type":"selector","outbounds":[],"use_all_providers":true,"include":"(?i)美国|us|unitedstates|united states"},
+    {"tag":"other","type":"selector","outbounds":[],"use_all_providers":true,"exclude":"(?i)剩余|到期|香港|hk|hongkong|hong kong|新加坡|sg|singapore|日本|jp|japan|美国|us|unitedstates|united states"},
+    {"tag":"proxy","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
+    {"tag":"ai","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"us"},
+    {"tag":"tg","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
+    {"tag":"GLOBAL","type":"selector","outbounds":["hk","sg","jp","us","other"],"default":"hk"},
+    {"tag":"direct","type":"direct","domain_resolver":"udp_dns"}
+  ],
+  "inbounds": [
+    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"auto_route":true,"auto_redirect":false,"platform":{"http_proxy":{"enabled":true,"server":"127.0.0.1","server_port":7890,"bypass_domain":["*zhihu.com","*zhimg.com","*jd.com","100ime-iat-api.xfyun.cn","*360buyimg.com"]}}},
+    {"tag":"mixed-in","type":"mixed","listen":"127.0.0.1","listen_port":7890,"set_system_proxy":false}
+  ],
+  "log": {"level":"warn","output":"sing-box.log","timestamp":true},
+  "http_clients": [
+    {"tag":"proxy_download","detour":"proxy"},
+    {"tag":"direct_download","detour":"direct"}
+  ],
+  "services": [
+    {"type":"api","listen":"127.0.0.1","listen_port":9090,"dashboard":"dashboard"}
+  ],
+  "experimental": {
+    "cache_file": {"enabled":true,"store_fakeip":true,"store_dns":true}
+  }
+}

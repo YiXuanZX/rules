@@ -1,0 +1,19 @@
+{
+  "inbounds": [
+    {"tag":"dns-in","type":"direct","listen":"::","listen_port":1053},
+    {"tag":"mixed-in","type":"mixed","listen":"::","listen_port":7890},
+    {"tag":"redirect-in","type":"redirect","listen":"::","listen_port":7891},
+    {"tag":"tproxy-in","type":"tproxy","listen":"::","listen_port":7892},
+    {"tag":"tun-in","type":"tun","address":["172.19.0.1/30","fdfe:dcba:9876::1/126"],"interface_name":"momo"}
+  ]
+}
+
+①
+需要自行替换inbounds字段下的所有内容
+
+②
+auto_detect_interface需要关闭或删除
+
+③
+此条规则添加到route.rules第一行
+{"inbound":"dns-in","action":"hijack-dns"}
